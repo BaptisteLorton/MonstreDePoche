@@ -1,0 +1,59 @@
+Monster
+    Name Pikachu
+    Type Electric
+    HP 110 141
+    Speed 110 141
+    Attack 75 106
+    Defense 50 82
+    Paralysis 0.2
+EndMonster
+
+Monster
+    Name Dracaufeu
+    Type Fire
+    HP 110 141
+    Speed 110 141
+    Attack 75 106
+    Defense 50 82
+EndMonster
+
+Monster
+    Name Tortank
+    Type Water
+    HP 110 141
+    Speed 110 141
+    Attack 75 106
+    Defense 50 82
+    Flood 0.25
+    Fall 0.35
+EndMonster
+
+Monster
+    Name Florizarre
+    Type Grass
+    HP 110 141
+    Speed 110 141
+    Attack 75 106
+    Defense 50 82
+    Heel 0.2
+EndMonster
+
+Monster
+    Name Insecateur
+    Type Insect
+    HP 110 141
+    Speed 110 141
+    Attack 75 106
+    Defense 50 82
+    Poison 0
+EndMonster
+
+Monster
+    Name Onix
+    Type Ground
+    HP 110 141
+    Speed 110 141
+    Attack 75 106
+    Defense 50 82
+    Tunnel 0.05
+EndMonster
