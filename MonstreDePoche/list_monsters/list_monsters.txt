@@ -7,7 +7,6 @@ Monster
     Defense 50 82
     Paralysis 0.2
 EndMonster
-
 Monster
     Name Dracaufeu
     Type Fire
@@ -16,7 +15,6 @@ Monster
     Attack 75 106
     Defense 50 82
 EndMonster
-
 Monster
     Name Tortank
     Type Water
@@ -27,7 +25,6 @@ Monster
     Flood 0.25
     Fall 0.35
 EndMonster
-
 Monster
     Name Florizarre
     Type Grass
@@ -35,7 +32,6 @@ Monster
     Speed 110 141
     Attack 75 106
     Defense 50 82
-    Heel 0.2
 EndMonster
 
 Monster
@@ -45,7 +41,6 @@ Monster
     Speed 110 141
     Attack 75 106
     Defense 50 82
-    Poison 0
 EndMonster
 
 Monster
@@ -55,5 +50,4 @@ Monster
     Speed 110 141
     Attack 75 106
     Defense 50 82
-    Tunnel 0.05
 EndMonster
