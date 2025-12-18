@@ -1,6 +1,7 @@
 package MonstreDePoche.models.monsters;
 
 import MonstreDePoche.models.Type;
+import MonstreDePoche.models.Effects.Effect;
 import MonstreDePoche.models.attacks.Attack;
 
 public class Monster {
@@ -11,6 +12,7 @@ public class Monster {
     public int defense;
     public int speed;
     public Attack[] attacks;
+    public Effect currentEffect;
 
     public Monster(String name, int hp, int attack, int defense, int speed, Attack[] attacks) {
         this.name = name;
@@ -25,7 +27,7 @@ public class Monster {
         this.hp = choice.getRandomHp();
         this.attack = choice.getRandomAttack();
         this.defense = choice.getRandomDefense();
-        this.speed = choice.getRandomSpeed();
+        this.speed = choice.getRandomSpeed();    
     }
 
     @Override
