@@ -1,6 +1,7 @@
 package MonstreDePoche.models.monsters;
 
 import MonstreDePoche.models.Type;
+import static MonstreDePoche.interfaces.ConsoleEffects.*;
 
 public class MonsterChoice {
     private String name;
@@ -27,12 +28,31 @@ public class MonsterChoice {
         this.speed_min = speed_min;
     }
 
+    private String getColor(Type type){
+        switch (type) {
+            case Type.FIRE:
+                return RED;
+            case Type.WATER:
+                return BLUE;
+            case Type.GRASS:
+                return GREEN;
+            case Type.INSECT:
+                return LIME;
+            case Type.ELECTRIC:
+                return YELLOW;
+            case Type.GROUND:
+                return BROWN;
+            default:
+                return RESET;
+        }
+    }
+
     public String getSmallInformation(){
-        return name + " : " + type;
+        return name + " : " + getColor(type) + type + RESET;
     }
 
     public String getFullInformation(){
-        return name + " : " + type +
+        return name + " : " + getColor(type) + type + RESET +
                 "\nHP : " + hp_min + " - " + hp_max +
                 "\nAttack : " + attack_min + " - " + attack_max +
                 "\nDefense : " + defense_min + " - " + defense_max +

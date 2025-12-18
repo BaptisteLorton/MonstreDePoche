@@ -12,16 +12,18 @@ import MonstreDePoche.models.monsters.InsectMonster;
 import MonstreDePoche.models.monsters.Monster;
 import MonstreDePoche.models.monsters.MonsterChoice;
 import MonstreDePoche.models.monsters.WaterMonster;
-import static MonstreDePoche.interfaces.Interface.clearConsole;
+import static MonstreDePoche.interfaces.ConsoleEffects.*;
 
 public class ChoiceInterface {
 
     Player player;
+    String color;
     MonsterChoice[] monstersDex;
 
-    public ChoiceInterface(Player player, MonsterChoice[] monstersDex) {
+    public ChoiceInterface(Player player, MonsterChoice[] monstersDex, String color) {
         this.player = player;
         this.monstersDex = monstersDex;
+        this.color = color;
     }
 
     private Monster createMonster(MonsterChoice choice) {
@@ -44,7 +46,7 @@ public class ChoiceInterface {
     }
 
     public void chooseMonstersInterface() {
-        System.out.println(player.getName() + ", please choose your monsters !");
+        System.out.println(color + player.getName() + RESET + ", please choose your monsters !");
         String[] inputs = {};
         Scanner scanner = new Scanner(System.in);
         while (inputs.length != 3) {

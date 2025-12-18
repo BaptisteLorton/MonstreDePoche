@@ -5,25 +5,9 @@ import java.util.Scanner;
 import MonstreDePoche.models.MonsterDex;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.monsters.MonsterChoice;
+import static MonstreDePoche.interfaces.ConsoleEffects.*;
 
 public class Interface {
-
-    public static void clearConsole() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls")
-                    .inheritIO()
-                    .start()
-                    .waitFor();
-            } else {
-                new ProcessBuilder("clear")
-                    .inheritIO()
-                    .start()
-                    .waitFor();
-            }
-        } catch (Exception e) {
-        }
-    }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -32,7 +16,7 @@ public class Interface {
         boolean running = true;
 
         while (running) {
-            System.out.println("Welcome to PocketMonster !");
+            System.out.println("Welcome to " + ConsoleEffects.CYAN + "PocketMonster" + ConsoleEffects.RESET + " !");
             System.out.println("Please enter the name of the first player: ");
             System.out.print("\n>");
             String input = scanner.nextLine();
@@ -46,15 +30,15 @@ public class Interface {
 
             MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/list_monsters/list_monsters.txt");
 
-            ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex);
+            ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex, RED);
             choiceInterfacePlayer1.chooseMonstersInterface();
             clearConsole();
-            ChoiceInterface choiceInterfacePlayer2 = new ChoiceInterface(player2, monsterDex);
+            ChoiceInterface choiceInterfacePlayer2 = new ChoiceInterface(player2, monsterDex, BLUE);
             choiceInterfacePlayer2.chooseMonstersInterface();
 
 
-            BattleInterface battleInterfacePlayer1 = new BattleInterface(player1, player2);
-            BattleInterface battleInterfacePlayer2 = new BattleInterface(player2, player1);
+            BattleInterface battleInterfacePlayer1 = new BattleInterface(player1, player2, RED);
+            BattleInterface battleInterfacePlayer2 = new BattleInterface(player2, player1, BLUE);
             Player activePlayer = player1.getMonsters()[0].getSpeed() >= player2.getMonsters()[0].getSpeed() ? player1 : player2;
             while (activePlayer.canPlay()) {
                 clearConsole();

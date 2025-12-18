@@ -4,6 +4,7 @@ import MonstreDePoche.models.monsters.Monster;
 
 public class Player {
     private String name;
+    private Monster activeMonster;
     private Monster[] monsters = new Monster[3];
 
     public Player(String name) {
@@ -12,6 +13,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public Monster getActiveMonster() {
+        return activeMonster;
     }
 
     public Monster[] getMonsters() {
