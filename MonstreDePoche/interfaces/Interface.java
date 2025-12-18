@@ -73,7 +73,7 @@ public class Interface {
             System.out.println("Hello " + input + "!");
             Player player2 = new Player(input);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/list_monsters/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/list_monsters/list_monsters.txt");
 
             chooseMonstersInterface(player1, monsterDex);
             chooseMonstersInterface(player2, monsterDex);
