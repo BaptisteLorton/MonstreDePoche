@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import MonstreDePoche.models.monsters.Monster;
+import MonstreDePoche.models.monsters.MonsterChoice;
+import MonstreDePoche.models.Type;
 
 public class MonsterDex {
     
@@ -14,7 +16,7 @@ public class MonsterDex {
 
     public static MonsterChoice[] createMonsterDex(String file) {
         //List<MonsterChoice> tempDexList = new ArrayList<>();
-        MonsterChoice[] tempDexList = {};
+        List<MonsterChoice> tempDexList = new ArrayList<>();
 
         try {
             String contenu = Files.readString(Paths.get(file));
@@ -97,7 +99,7 @@ public class MonsterDex {
                     //System.out.println("HP: " + hpMin + "-" + hpMax + " | Atk: " + atkMin + "-" + atkMax);
                     //System.out.println("Def: " + defMin + "-" + defMax + " | Spd: " + spdMin + "-" + spdMax);
                     
-                    monsterDex.add(new MonsterChoice(name, type, hpMax, hpMin, atkMax, atkMin, defMax, defMin, spdMax, spdMin));
+                    tempDexList.add(new MonsterChoice(name, Type.valueOf(type.toUpperCase()), hpMax, hpMin, atkMax, atkMin, defMax, defMin, spdMax, spdMin));
 
                     // Création de l'objet (Vérifiez votre constructeur Monster !)
                     // Monster m = new Monster(name, type, hpMin, hpMax, atkMin, atkMax, defMin, defMax, spdMin, spdMax);
@@ -111,6 +113,11 @@ public class MonsterDex {
             e.printStackTrace();
         }
 
-        return tempDexList;
+        final MonsterChoice[] dexArray = new MonsterChoice[tempDexList.size()];
+        for (int i = 0; i < tempDexList.size(); i++) {
+            dexArray[i] = tempDexList.get(i);
+        }
+
+        return dexArray;
     }
 }
