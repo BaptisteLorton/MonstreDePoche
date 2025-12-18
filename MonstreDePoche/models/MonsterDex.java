@@ -9,7 +9,7 @@ import MonstreDePoche.models.monsters.Monster;
 
 public class MonsterDex {
     
-    // Note : Vérifiez bien votre chemin d'accès selon la structure de votre projet
+    // Note : Vérifiez bien votre chemin d'accès selon la structure de votre projet.
     //private MonsterChoice[] monsterDex = createMonsterDex("MonstreDePoche/MonstreDePoche/list_monsters/list_monsters.txt");
 
     public static MonsterChoice[] createMonsterDex(String file) {
