@@ -16,5 +16,6 @@ public class BattleInterface {
 
     public void battleInterface() {
         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+        System.out.println(showMonsters());
     }
 }

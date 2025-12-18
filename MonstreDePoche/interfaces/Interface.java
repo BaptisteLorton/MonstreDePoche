@@ -15,7 +15,7 @@ public class Interface {
         clearConsole();
 
         boolean running = true;
-        AudioManager.playMusic("MonstreDePoche/MonstreDePoche/resource/musique_libre_de_droit.wav");
+        AudioManager.playMusic("MonstreDePoche/resource/musique_libre_de_droit.wav");
 
         while (running) {
             System.out.println("Welcome to " + ConsoleEffects.CYAN + "PocketMonster" + ConsoleEffects.RESET + " !");
@@ -30,7 +30,7 @@ public class Interface {
             clearConsole();
             Player player2 = new Player(input);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/resource/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/resource/list_monsters.txt");
 
             ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex, RED);
             choiceInterfacePlayer1.chooseMonstersInterface();
