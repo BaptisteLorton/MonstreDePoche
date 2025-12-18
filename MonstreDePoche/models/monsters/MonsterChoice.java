@@ -38,4 +38,60 @@ public class MonsterChoice {
                 "\nDefense : " + defense_min + " - " + defense_max +
                 "\nSpeed : " + speed_min + " - " + speed_max;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public int getHp_max() {
+        return hp_max;
+    }
+
+    public int getHp_min() {
+        return hp_min;
+    }
+
+    public int getAttack_max() {
+        return attack_max;
+    }
+
+    public int getAttack_min() {
+        return attack_min;
+    }
+
+    public int getDefense_max() {
+        return defense_max;
+    }
+
+    public int getDefense_min() {
+        return defense_min;
+    }
+
+    public int getSpeed_max() {
+        return speed_max;
+    }
+
+    public int getSpeed_min() {
+        return speed_min;
+    }
+
+    public int getRandomHp(){
+        return (int) (Math.random() * (hp_max - hp_min + 1)) + hp_min;
+    }
+
+    public int getRandomAttack(){
+        return (int) (Math.random() * (attack_max - attack_min + 1)) + attack_min;
+    }
+
+    public int getRandomDefense(){
+        return (int) (Math.random() * (defense_max - defense_min + 1)) + defense_min;
+    }
+
+    public int getRandomSpeed(){
+        return (int) (Math.random() * (speed_max - speed_min + 1)) + speed_min;
+    }
 }

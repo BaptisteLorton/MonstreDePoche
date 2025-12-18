@@ -2,9 +2,14 @@ package MonstreDePoche.models.monsters;
 import MonstreDePoche.models.attacks.Attack;
 import MonstreDePoche.models.Type;
 
-public class GrassMonster extends Monster {
+public class GrassMonster extends NatureMonster {
     public GrassMonster(String name, int hp, int attack, int defense, int speed, Attack[] attacks) {
         super(name, hp, attack, defense, speed, attacks);
+        this.type = Type.GRASS;
+    }
+
+    public GrassMonster(MonsterChoice choice) {
+        super(choice);
         this.type = Type.GRASS;
     }
 

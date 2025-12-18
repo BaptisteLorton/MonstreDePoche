@@ -8,6 +8,11 @@ public class GroundMonster extends Monster {
         this.type = Type.GROUND;
     }
 
+    public GroundMonster(MonsterChoice choice) {
+        super(choice);
+        this.type = Type.GROUND;
+    }
+
     public void attack(Monster target, Attack attack) {
         int damage = attack.getPower();
         if (target instanceof ElectricMonster){

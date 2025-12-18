@@ -8,6 +8,11 @@ public class FireMonster extends Monster {
         this.type = Type.FIRE;
     }
 
+    public FireMonster(MonsterChoice choice) {
+        super(choice);
+        this.type = Type.FIRE;
+    }
+
     public void attack(Monster target, Attack attack) {
         int damage = attack.getPower();
         if (target instanceof GrassMonster){

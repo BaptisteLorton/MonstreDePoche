@@ -21,7 +21,11 @@ public class Monster {
     }
 
     public Monster(MonsterChoice choice) {
-        
+        this.name = choice.getName();
+        this.hp = choice.getRandomHp();
+        this.attack = choice.getRandomAttack();
+        this.defense = choice.getRandomDefense();
+        this.speed = choice.getRandomSpeed();
     }
 
     @Override
@@ -48,5 +52,9 @@ public class Monster {
 
     public String getName() {
         return name;
+    }
+
+    public int getSpeed() {
+        return speed;
     }
 }
