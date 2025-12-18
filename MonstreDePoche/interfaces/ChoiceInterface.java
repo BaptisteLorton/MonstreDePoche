@@ -12,6 +12,7 @@ import MonstreDePoche.models.monsters.InsectMonster;
 import MonstreDePoche.models.monsters.Monster;
 import MonstreDePoche.models.monsters.MonsterChoice;
 import MonstreDePoche.models.monsters.WaterMonster;
+import static MonstreDePoche.interfaces.Interface.clearConsole;
 
 public class ChoiceInterface {
 
@@ -44,12 +45,12 @@ public class ChoiceInterface {
 
     public void chooseMonstersInterface() {
         System.out.println(player.getName() + ", please choose your monsters !");
-        for (int i = 0; i < monstersDex.length; i++) {
-            System.out.println((i + 1) + ". " + monstersDex[i].getSmallInformation());
-        }
         String[] inputs = {};
         Scanner scanner = new Scanner(System.in);
         while (inputs.length != 3) {
+            for (int i = 0; i < monstersDex.length; i++) {
+                System.out.println((i + 1) + ". " + monstersDex[i].getSmallInformation());
+            }
             System.out.println("To have more information about a monster, enter its number.");
             System.out.println("Enter the numbers of the monsters you want to choose, separated by spaces");
             String input = scanner.nextLine();
@@ -57,8 +58,10 @@ public class ChoiceInterface {
             if (inputs.length == 1){
                 int index = Integer.parseInt(inputs[0]) - 1;
                 if (index >= 0 && index < monstersDex.length) {
+                    clearConsole();
                     System.out.println(monstersDex[index].getFullInformation());
                 } else {
+                    clearConsole();
                     System.out.println("Invalid monster number.");
                 }
             } else if (inputs.length == 3) {
@@ -69,6 +72,7 @@ public class ChoiceInterface {
                     if (index >= 0 && index < monstersDex.length) {
                         chosenMonsters[i] = createMonster(monstersDex[index]);
                     } else {
+                        clearConsole();
                         System.out.println("Invalid monster number: " + inputs[i]);
                         valid = false;
                         break;
@@ -76,6 +80,7 @@ public class ChoiceInterface {
                 }
                 if (valid) {
                     player.setMonsters(chosenMonsters);
+                    clearConsole();
                     System.out.println("You have chosen:");
                     for (Monster m : chosenMonsters) {
                         System.out.println("- " + m.getName());
@@ -84,6 +89,7 @@ public class ChoiceInterface {
                     inputs = new String[0];
                 }
             } else {
+                clearConsole();
                 System.out.println("Please enter exactly three numbers.");
             }
         }
