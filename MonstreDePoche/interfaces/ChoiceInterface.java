@@ -51,8 +51,9 @@ public class ChoiceInterface {
             for (int i = 0; i < monstersDex.length; i++) {
                 System.out.println((i + 1) + ". " + monstersDex[i].getSmallInformation());
             }
-            System.out.println("To have more information about a monster, enter its number.");
+            System.out.println("\nTo have more information about a monster, enter its number.");
             System.out.println("Enter the numbers of the monsters you want to choose, separated by spaces");
+            System.out.print("\n>");
             String input = scanner.nextLine();
             inputs = input.split(" ");
             if (inputs.length == 1){
@@ -60,6 +61,7 @@ public class ChoiceInterface {
                 if (index >= 0 && index < monstersDex.length) {
                     clearConsole();
                     System.out.println(monstersDex[index].getFullInformation());
+                    System.out.println("\n---------------------------\n");
                 } else {
                     clearConsole();
                     System.out.println("Invalid monster number.");

@@ -34,17 +34,17 @@ public class Interface {
         while (running) {
             System.out.println("Welcome to PocketMonster !");
             System.out.println("Please enter the name of the first player: ");
+            System.out.print("\n>");
             String input = scanner.nextLine();
             clearConsole();
-            System.out.println("Hello " + input + "!");
             Player player1 = new Player(input);
             System.out.println("Please enter the name of the second player: ");
+            System.out.print("\n>");
             input = scanner.nextLine();
             clearConsole();
-            System.out.println("Hello " + input + "!");
             Player player2 = new Player(input);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/list_monsters/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/list_monsters/list_monsters.txt");
 
             ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex);
             choiceInterfacePlayer1.chooseMonstersInterface();
