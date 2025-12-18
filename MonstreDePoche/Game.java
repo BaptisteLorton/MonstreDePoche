@@ -4,8 +4,6 @@ import MonstreDePoche.interfaces.Interface;
 
 public class Game {
     public static void main(String[] args) {
-        //Files files = new Files();
-        //files.initFiles();
         Interface gameInterface = new Interface();
         gameInterface.start();
     }

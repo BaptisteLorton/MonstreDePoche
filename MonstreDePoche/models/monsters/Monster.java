@@ -20,14 +20,33 @@ public class Monster {
         this.speed = speed;
     }
 
+    public Monster(MonsterChoice choice) {
+        
+    }
+
     @Override
     public String toString() {
-        return name +" {" +
-                ", hp=" + hp +
+        return name +
+                " {hp=" + hp +
                 ", attack=" + attack +
                 ", defense=" + defense +
-                ", speed='" + speed + '\'' +
+                ", speed=" + speed +
                 ", type=" + type +
                 '}';
+    }
+
+    public void receiveDamage(int damage) {
+        this.hp -= damage;
+        if (this.hp < 0) {
+            this.hp = 0;
+        }
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public String getName() {
+        return name;
     }
 }

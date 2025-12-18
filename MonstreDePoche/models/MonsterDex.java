@@ -6,9 +6,8 @@ import java.nio.file.Paths;
 import MonstreDePoche.models.monsters.Monster;
 
 public class MonsterDex {
-    Monster[] monsterDex = createMonsterDex("MonstreDePoche/MonstreDePoche/list_monsters/list_monsters.txt");
 
-    Monster[] createMonsterDex(String file){
+    static public Monster[] createMonsterDex(String file){
         Monster[] MonsterDex2 = {};
         
         try {

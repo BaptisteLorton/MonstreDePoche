@@ -15,4 +15,24 @@ public class Attack {
         this.nbUse = nbUse;
         this.fail = fail;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPower() {
+        return power;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public int getNbUse() {
+        return nbUse;
+    }
+
+    public float getFail() {
+        return fail;
+    }
 }
