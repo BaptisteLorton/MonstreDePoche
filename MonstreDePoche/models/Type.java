@@ -1,6 +1,6 @@
 package MonstreDePoche.models;
 
-public enum Type {
+public enum Type{
     FIRE,
     WATER,
     GRASS,

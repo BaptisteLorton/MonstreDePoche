@@ -8,6 +8,11 @@ public class WaterMonster extends Monster {
         this.type = Type.WATER;
     }
 
+    public WaterMonster(MonsterChoice choice) {
+        super(choice);
+        this.type = Type.WATER;
+    }
+
     public void attack(Monster target, Attack attack) {
         int damage = attack.getPower();
         if (target instanceof FireMonster){

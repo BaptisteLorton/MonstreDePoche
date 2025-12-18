@@ -21,4 +21,13 @@ public class Player {
     public void setMonsters(Monster[] monsters) {
         this.monsters = monsters;
     }
+
+    public boolean canPlay() {
+        for (Monster monster : monsters) {
+            if (monster.getHp() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
