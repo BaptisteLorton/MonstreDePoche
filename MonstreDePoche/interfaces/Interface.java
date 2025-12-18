@@ -2,6 +2,7 @@ package MonstreDePoche.interfaces;
 
 import java.util.Scanner;
 
+import MonstreDePoche.models.AudioManager;
 import MonstreDePoche.models.MonsterDex;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.monsters.MonsterChoice;
@@ -30,6 +31,7 @@ public class Interface {
         clearConsole();
 
         boolean running = true;
+        AudioManager.playMusic("MonstreDePoche/MonstreDePoche/resource/musique_libre_de_droit.wav");
 
         while (running) {
             System.out.println("Welcome to PocketMonster !");
@@ -44,7 +46,7 @@ public class Interface {
             clearConsole();
             Player player2 = new Player(input);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/list_monsters/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/resource/list_monsters.txt");
 
             ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex);
             choiceInterfacePlayer1.chooseMonstersInterface();
