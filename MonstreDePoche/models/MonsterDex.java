@@ -92,10 +92,10 @@ public class MonsterDex {
                 }
 
                 if (!name.isEmpty()) {
-                    System.out.println("------------------------------------------------");
-                    System.out.println("Monstre : " + name + " (" + type + ")");
-                    System.out.println("HP: " + hpMin + "-" + hpMax + " | Atk: " + atkMin + "-" + atkMax);
-                    System.out.println("Def: " + defMin + "-" + defMax + " | Spd: " + spdMin + "-" + spdMax);
+                    //System.out.println("------------------------------------------------");
+                    //System.out.println("Monstre : " + name + " (" + type + ")");
+                    //System.out.println("HP: " + hpMin + "-" + hpMax + " | Atk: " + atkMin + "-" + atkMax);
+                    //System.out.println("Def: " + defMin + "-" + defMax + " | Spd: " + spdMin + "-" + spdMax);
                     
                     monsterDex.add(new MonsterChoice(name, type, hpMax, hpMin, atkMax, atkMin, defMax, defMin, spdMax, spdMin));
 
