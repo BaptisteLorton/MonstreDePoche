@@ -2,7 +2,6 @@ package MonstreDePoche.interfaces;
 
 import java.util.Scanner;
 
-import MonstreDePoche.models.AudioManager;
 import MonstreDePoche.models.MonsterDex;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.monsters.MonsterChoice;
@@ -54,7 +53,7 @@ public class Interface {
             ChoiceInterface choiceInterfacePlayer2 = new ChoiceInterface(player2, monsterDex);
             choiceInterfacePlayer2.chooseMonstersInterface();
 
-
+            AudioManager.stopMusic();
             BattleInterface battleInterfacePlayer1 = new BattleInterface(player1, player2);
             BattleInterface battleInterfacePlayer2 = new BattleInterface(player2, player1);
             Player activePlayer = player1.getMonsters()[0].getSpeed() >= player2.getMonsters()[0].getSpeed() ? player1 : player2;
