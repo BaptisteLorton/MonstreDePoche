@@ -3,7 +3,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import MonstreDePoche.models.Type;
 import MonstreDePoche.models.attacks.*;
@@ -46,7 +48,8 @@ public class AttacksDex {
                     line = line.trim();
                     if(line.startsWith("Name")){
                         String[] temp = line.split(" ");
-                        name = temp[1];
+                        //name = temp[1];
+                        name = Arrays.stream(temp).skip(1).collect(Collectors.joining(" "));
                     }
                     else if(line.startsWith("Type")){
                         String[] temp = line.split(" ");
@@ -134,7 +137,7 @@ public class AttacksDex {
             }
             return attacks;
         }
-        else if(monster.getType()==Type.NATURE){
+        else if(monster.getType()==Type.GRASS || monster.getType()==Type.INSECT){
             for (int i = 0; i < 2; i++) {
                 int randomIndex = random.nextInt(attacks_nature.size());
                 attacks[i] = attacks_nature.get(randomIndex);

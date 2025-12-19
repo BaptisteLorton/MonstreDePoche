@@ -23,8 +23,8 @@ Monster
     Speed 110 141
     Attack 75 106
     Defense 50 82
-    Flood 0.25
-    Fall 0.35
+    Flood 0.26
+    Fall 0.37
 EndMonster
 Monster
     Name Florizarre

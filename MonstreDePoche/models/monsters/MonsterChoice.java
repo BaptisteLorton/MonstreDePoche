@@ -15,8 +15,9 @@ public class MonsterChoice {
     private int defense_min;
     private int speed_max;
     private int speed_min;
+    private String caracteristicSpecial;
 
-    public MonsterChoice(String name, Type type, int hp_min, int hp_max, int attack_min, int attack_max, int defense_min, int defense_max, int speed_min, int speed_max) {
+    public MonsterChoice(String name, Type type, int hp_min, int hp_max, int attack_min, int attack_max, int defense_min, int defense_max, int speed_min, int speed_max, String caracteristicSpecial) {
         this.name = name;
         this.type = type;
         this.hp_max = hp_max;
@@ -27,6 +28,7 @@ public class MonsterChoice {
         this.defense_min = defense_min;
         this.speed_max = speed_max;
         this.speed_min = speed_min;
+        this.caracteristicSpecial = caracteristicSpecial;
     }
 
     private String getColor(Type type){
@@ -114,5 +116,9 @@ public class MonsterChoice {
 
     public int getRandomSpeed(){
         return (int) (Math.random() * (speed_max - speed_min + 1)) + speed_min;
+    }
+
+    public String getCaracteristicSpecial() {
+        return caracteristicSpecial;
     }
 }
