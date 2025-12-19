@@ -1,11 +1,12 @@
 package MonstreDePoche.views;
 
-import static MonstreDePoche.views.ConsoleEffects.*;
-
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
+import static MonstreDePoche.views.ConsoleEffects.*;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.monsters.Monster;
+import static MonstreDePoche.controllers.GameActions.*;
 
 public class BattleInterface {
     private String color;
@@ -22,21 +23,25 @@ public class BattleInterface {
         double hpRatio = (double) monster.getHp() / monster.getHpMax();
         int totalBars = 20;
         int filledBars = (int) (hpRatio * totalBars);
+        String color = "";
+        if (hpRatio >= 0.5) {
+            color = GREEN;
+        } else if (hpRatio >= 0.2) {
+            color = YELLOW;
+        } else {
+            color = RED;
+        }
         StringBuilder hpBar = new StringBuilder("");
+        hpBar.append(color);
         for (int i = 0; i < totalBars; i++) {
-            if (i == 0 && filledBars == 0) {
-                hpBar.append("[");
-            } else if (i < filledBars) {
+            if (i < filledBars) {
                 hpBar.append("█");
             } else {
-                System.out.println(i + " " + filledBars + " " + totalBars);
-                if (i == totalBars - 1 && filledBars != totalBars) {
-                    hpBar.append("]");
-                } else {
-                    hpBar.append(" ");
-                }
+                hpBar.append(GRAY);
+                hpBar.append("░");
             }
         }
+        hpBar.append(RESET);
         hpBar.append(" ");
         hpBar.append(monster.getHp()).append("/").append(monster.getHpMax()).append(" HP");
         return hpBar.toString();
@@ -47,17 +52,18 @@ public class BattleInterface {
         String otherInfo = otherPlayer.getActiveMonster().getColor() + otherPlayer.getActiveMonster().getName() + RESET;
         otherInfo += "\n" + showHp(otherPlayer.getActiveMonster());
         String activeInfo = activePlayer.getActiveMonster().getColor() + activePlayer.getActiveMonster().getName() + RESET;
-        activeInfo += "\n" + showHp(activePlayer.getActiveMonster());
+        activeInfo += "\n                     " + showHp(activePlayer.getActiveMonster());
         string += "\n" + otherInfo + "\n";
         string += """
-                                   _,--''--._        
-                                  /  _    _  \\       
-                               _  \\(o )  (o )/  _   
-                              (_\\  '.__  __.' /_ )  
-                                 `-.   ''    .-'     
-                                    |        |        
-                                    \\       /        
-                                     '.____.'
+
+                                           _,--''--._        
+                                          /  _    _  \\       
+                                       _  \\(o )  (o )/  _   
+                                      (_\\  '.__  __.' /_ )  
+                                         `-.   ''    .-'     
+                                            |        |        
+                                            \\       /        
+                                             '.____.'
 
         
                  _,--''--._        
@@ -68,6 +74,7 @@ public class BattleInterface {
                  |        |        
                  \\       /        
                  '.____.'
+
            """;
         string += "                     " + activeInfo + "\n";
         return string;
@@ -87,6 +94,23 @@ public class BattleInterface {
             string += "3 - " + activePlayer.getActiveMonster().getAttacks()[2] + "\n";
             string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3] + "\n";
             string += "5 - Back to main menu\n";
+        } else if (page == 2){
+            string += "TDB";
+        } else if(page == 3){
+            string += "Choose a monster to switch to:\n";
+            Monster[] monsters = getAvailableMonsters(activePlayer);
+            for(int i = 0; i < monsters.length; i++){
+                if (monsters[i] == activePlayer.getActiveMonster()) {
+                    continue;
+                } else {
+                    if (monsters[i].getHp() <= 0) {
+                        string += (i + 1) + " - " + GRAY + monsters[i].getName() + RESET + " (" + monsters[i].getHp() + "/" + monsters[i].getHpMax() + " HP)\n";
+                    } else {
+                        string += (i + 1) + " - " + monsters[i].getColor() + monsters[i].getName() + RESET + " (" + monsters[i].getHp() + "/" + monsters[i].getHpMax() + " HP)\n";
+                    }
+                }
+            }
+            string += "3 - Back to main menu\n";
         }
         return string;
     }
@@ -94,13 +118,11 @@ public class BattleInterface {
     public void battleInterface() {
         Scanner scanner = new Scanner(System.in);
         
-        activePlayer.getActiveMonster().receiveDamage(100);
-
         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
-        System.out.println(showMonsters());
-        System.out.println(showMenu(0));
         boolean running = true;
         while (running) {
+            System.out.println(showMonsters());
+            System.out.println(showMenu(0));
             System.out.print(">");
             String input = scanner.nextLine();
             switch (input) {
@@ -108,6 +130,52 @@ public class BattleInterface {
                     clearConsole();
                     System.out.println(showMonsters());
                     System.out.println(showMenu(1));
+                    input = scanner.nextLine();
+                    if (input.equals("5")) {
+                        clearConsole();
+                    } else {
+                        doAttack(activePlayer, otherPlayer, input);
+                        System.out.println("\n" + color + activePlayer.getActiveMonster().getName() + RESET + " used " + activePlayer.getActiveMonster().getAttacks()[Integer.parseInt(input)-1] + "!");
+                        try {
+                            TimeUnit.SECONDS.sleep(2);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                        running = false;
+                    }
+                    break;
+                case "2":
+                    System.out.println("Use Item selected. (Functionality not implemented yet)");
+                    running = false;
+                    break;
+                case "3":
+                    clearConsole();
+                    String check = "start";
+                    while (check != "") {
+                        System.out.println(showMonsters());
+                        System.out.println(showMenu(3));
+                        System.out.print(">");
+                        input = scanner.nextLine();
+                        check = checkChangeMonster(activePlayer, Integer.parseInt(input)-1);
+                        if (check == "") {
+                            if (input.equals("3")) {
+                                clearConsole();
+                                break;
+                            }
+                            changeActiveMonster(activePlayer, Integer.parseInt(input)-1);
+                            System.out.println("\n" + color + activePlayer.getName() + RESET + " switched to " + activePlayer.getActiveMonster().getName() + "!");
+                            running = false;
+                        } else {
+                            System.out.println("\n" + check);
+                        }
+                        try {
+                            TimeUnit.SECONDS.sleep(2);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                        clearConsole();
+                    }
+                    break;
                 default:
                     System.out.println("Invalid input. Please enter a number corresponding to your choice.");
                     break;

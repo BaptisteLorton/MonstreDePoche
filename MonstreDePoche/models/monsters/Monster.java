@@ -46,6 +46,9 @@ public class Monster {
                 '}';
     }
 
+    public void attack(Monster target, Attack attack) {
+    }
+
     public void receiveDamage(int damage) {
         this.hp -= damage;
         if (this.hp < 0) {

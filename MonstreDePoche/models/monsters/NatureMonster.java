@@ -10,6 +10,7 @@ public class NatureMonster extends Monster {
         super(choice);
     }
 
+    @Override
     public void attack(Monster target, Attack attack) {
         int damage = attack.getPower();
         if (target instanceof GroundMonster){

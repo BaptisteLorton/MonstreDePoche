@@ -13,6 +13,7 @@ public class ConsoleEffects {
     public static final String WHITE  = "\u001B[37m";
     public static final String LIME   = "\u001B[92m";
     public static final String BROWN  = "\u001B[38;5;130m";
+    public static final String GRAY   = "\u001B[90m";
 
     public static void clearConsole() {
         try {
