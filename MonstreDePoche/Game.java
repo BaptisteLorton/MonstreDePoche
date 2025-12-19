@@ -1,6 +1,6 @@
 package MonstreDePoche;
 
-import MonstreDePoche.interfaces.Interface;
+import MonstreDePoche.views.Interface;
 
 public class Game {
     public static void main(String[] args) {

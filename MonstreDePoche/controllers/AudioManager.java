@@ -1,4 +1,4 @@
-package MonstreDePoche.interfaces;
+package MonstreDePoche.controllers;
 
 import javax.sound.sampled.*;
 import java.io.File;

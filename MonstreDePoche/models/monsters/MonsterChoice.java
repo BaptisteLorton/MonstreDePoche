@@ -1,7 +1,8 @@
 package MonstreDePoche.models.monsters;
 
+import static MonstreDePoche.views.ConsoleEffects.*;
+
 import MonstreDePoche.models.Type;
-import static MonstreDePoche.interfaces.ConsoleEffects.*;
 
 public class MonsterChoice {
     private String name;

@@ -1,4 +1,4 @@
-package MonstreDePoche.models;
+package MonstreDePoche.controllers;
 
 import java.io.IOException;
 import java.nio.file.Files;

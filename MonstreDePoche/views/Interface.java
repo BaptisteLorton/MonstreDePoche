@@ -1,11 +1,13 @@
-package MonstreDePoche.interfaces;
+package MonstreDePoche.views;
+
+import static MonstreDePoche.views.ConsoleEffects.*;
 
 import java.util.Scanner;
 
-import MonstreDePoche.models.MonsterDex;
+import MonstreDePoche.controllers.AudioManager;
+import MonstreDePoche.controllers.MonsterDex;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.monsters.MonsterChoice;
-import static MonstreDePoche.interfaces.ConsoleEffects.*;
 
 public class Interface {
 

@@ -1,4 +1,6 @@
-package MonstreDePoche.interfaces;
+package MonstreDePoche.views;
+
+import static MonstreDePoche.views.ConsoleEffects.*;
 
 import java.util.Scanner;
 
@@ -12,7 +14,6 @@ import MonstreDePoche.models.monsters.InsectMonster;
 import MonstreDePoche.models.monsters.Monster;
 import MonstreDePoche.models.monsters.MonsterChoice;
 import MonstreDePoche.models.monsters.WaterMonster;
-import static MonstreDePoche.interfaces.ConsoleEffects.*;
 
 public class ChoiceInterface {
 
@@ -63,7 +64,6 @@ public class ChoiceInterface {
                 if (index >= 0 && index < monstersDex.length) {
                     clearConsole();
                     System.out.println(monstersDex[index].getFullInformation());
-                    System.out.println("\n---------------------------\n");
                 } else {
                     clearConsole();
                     System.out.println("Invalid monster number.");
@@ -75,6 +75,7 @@ public class ChoiceInterface {
                     int index = Integer.parseInt(inputs[i]) - 1;
                     if (index >= 0 && index < monstersDex.length) {
                         chosenMonsters[i] = createMonster(monstersDex[index]);
+                        chosenMonsters[i].setAttacks(gerenateAttacks(chosenMonsters[i]));
                     } else {
                         clearConsole();
                         System.out.println("Invalid monster number: " + inputs[i]);
@@ -84,11 +85,6 @@ public class ChoiceInterface {
                 }
                 if (valid) {
                     player.setMonsters(chosenMonsters);
-                    clearConsole();
-                    System.out.println("You have chosen:");
-                    for (Monster m : chosenMonsters) {
-                        System.out.println("- " + m.getName());
-                    }
                 } else {
                     inputs = new String[0];
                 }
@@ -96,6 +92,7 @@ public class ChoiceInterface {
                 clearConsole();
                 System.out.println("Please enter exactly three numbers.");
             }
+            System.out.println("\n---------------------------\n");
         }
     }
 }

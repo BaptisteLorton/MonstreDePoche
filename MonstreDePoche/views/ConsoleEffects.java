@@ -1,4 +1,4 @@
-package MonstreDePoche.interfaces;
+package MonstreDePoche.views;
 
 public class ConsoleEffects {
 
@@ -29,21 +29,5 @@ public class ConsoleEffects {
             }
         } catch (Exception e) {
         }
-    }
-
-    public static String showMonsters(){
-        return """
-
-
-        
-                 _,--''--._        
-                /  _    _  \\       
-             _  \\( o)  ( o)/  _   
-            (_\\  '.__  __.'  /_ )  
-              `-.    ''    .-'     
-                 |        |        
-                 \\       /        
-                  '.____.'
-           """;
     }
 }

@@ -25,6 +25,7 @@ public class Player {
 
     public void setMonsters(Monster[] monsters) {
         this.monsters = monsters;
+        this.activeMonster = monsters[0];
     }
 
     public boolean canPlay() {
