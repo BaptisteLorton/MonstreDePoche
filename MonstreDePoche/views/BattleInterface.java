@@ -5,8 +5,11 @@ import java.util.concurrent.TimeUnit;
 
 import static MonstreDePoche.views.ConsoleEffects.*;
 import MonstreDePoche.models.Player;
+import MonstreDePoche.models.actions.ChangeMonsterAction;
 import MonstreDePoche.models.monsters.Monster;
 import static MonstreDePoche.controllers.GameActions.*;
+import MonstreDePoche.models.actions.Action;
+import MonstreDePoche.models.actions.AttackAction;
 
 public class BattleInterface {
     private String color;
@@ -89,10 +92,10 @@ public class BattleInterface {
             string += "4 - Surrender\n";
         } else if(page == 1){
             string += "Choose an attack:\n";
-            string += "1 - " + activePlayer.getActiveMonster().getAttacks()[0] + "\n";
-            string += "2 - " + activePlayer.getActiveMonster().getAttacks()[1] + "\n";
-            string += "3 - " + activePlayer.getActiveMonster().getAttacks()[2] + "\n";
-            string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3] + "\n";
+            string += "1 - " + activePlayer.getActiveMonster().getAttacks()[0].getName() + "\n";
+            string += "2 - " + activePlayer.getActiveMonster().getAttacks()[1].getName() + "\n";
+            string += "3 - " + activePlayer.getActiveMonster().getAttacks()[2].getName() + "\n";
+            string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3].getName() + "\n";
             string += "5 - Back to main menu\n";
         } else if (page == 2){
             string += "TDB";
@@ -115,12 +118,11 @@ public class BattleInterface {
         return string;
     }
 
-    public void battleInterface() {
+    public Action battleInterface() {
         Scanner scanner = new Scanner(System.in);
         
         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
-        boolean running = true;
-        while (running) {
+        while (true) {
             System.out.println(showMonsters());
             System.out.println(showMenu(0));
             System.out.print(">");
@@ -128,26 +130,31 @@ public class BattleInterface {
             switch (input) {
                 case "1":
                     clearConsole();
-                    System.out.println(showMonsters());
-                    System.out.println(showMenu(1));
-                    input = scanner.nextLine();
-                    if (input.equals("5")) {
-                        clearConsole();
-                    } else {
-                        doAttack(activePlayer, otherPlayer, input);
-                        System.out.println("\n" + color + activePlayer.getActiveMonster().getName() + RESET + " used " + activePlayer.getActiveMonster().getAttacks()[Integer.parseInt(input)-1] + "!");
-                        try {
-                            TimeUnit.SECONDS.sleep(2);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
+                    boolean validInput = false;
+                    while (!validInput) {
+                        System.out.println(showMonsters());
+                        System.out.println(showMenu(1));
+                        System.out.print(">");
+                        input = scanner.nextLine();
+                        if (input.equals("5")) {
+                            clearConsole();
+                            break;
+                        } else {
+                            String message = "";
+                            if (Integer.parseInt(input) < 1 || Integer.parseInt(input) > 5) {
+                                clearConsole();
+                                System.out.println("Invalid input. Please enter a number corresponding to your choice.");
+                            } else {
+                                message = "\n" + color + activePlayer.getActiveMonster().getName() + RESET + " used " + activePlayer.getActiveMonster().getAttacks()[Integer.parseInt(input)-1].getName() + "!";
+                                return new AttackAction(activePlayer, otherPlayer, message, input);
+                            }
                         }
-                        running = false;
                     }
+                    clearConsole();
                     break;
                 case "2":
                     System.out.println("Use Item selected. (Functionality not implemented yet)");
-                    running = false;
-                    break;
+                    return null;
                 case "3":
                     clearConsole();
                     String check = "start";
@@ -162,17 +169,12 @@ public class BattleInterface {
                                 clearConsole();
                                 break;
                             }
-                            changeActiveMonster(activePlayer, Integer.parseInt(input)-1);
-                            System.out.println("\n" + color + activePlayer.getName() + RESET + " switched to " + activePlayer.getActiveMonster().getName() + "!");
-                            running = false;
+                            String message = "\n" + color + activePlayer.getName() + RESET + " switched to " + getAvailableMonsters(activePlayer)[Integer.parseInt(input)-1].getName() + "!";
+                            return new ChangeMonsterAction(activePlayer, Integer.parseInt(input)-1, message);
                         } else {
                             System.out.println("\n" + check);
                         }
-                        try {
-                            TimeUnit.SECONDS.sleep(2);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                        }
+                        sleep(2000);
                         clearConsole();
                     }
                     break;

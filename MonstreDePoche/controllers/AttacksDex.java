@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import MonstreDePoche.models.Type;
 import MonstreDePoche.models.attacks.*;
 import MonstreDePoche.models.monsters.Monster;
-import MonstreDePoche.models.monsters.MonsterChoice;
 
 public class AttacksDex { 
 
@@ -28,7 +27,7 @@ public class AttacksDex {
 
         
         try {
-            String contenu = Files.readString(Paths.get("MonstreDePoche/MonstreDePoche/resource/list_attaque.txt"));
+            String contenu = Files.readString(Paths.get("MonstreDePoche/resource/list_attaque.txt"));
             contenu = contenu.replaceAll("<[^>]*>", "");
 
             String[] attacksRaw = contenu.split("EndAttack");
