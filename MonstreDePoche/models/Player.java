@@ -40,4 +40,13 @@ public class Player {
         }
         return false;
     }
+
+    public boolean hasAvailableMonsters() {
+        for (Monster monster : monsters) {
+            if (monster.getHp() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

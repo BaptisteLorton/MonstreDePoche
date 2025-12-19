@@ -8,6 +8,8 @@ import MonstreDePoche.controllers.AudioManager;
 import MonstreDePoche.controllers.MonsterDex;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.monsters.MonsterChoice;
+import MonstreDePoche.models.actions.Action;
+import MonstreDePoche.controllers.GameActions;
 
 public class Interface {
 
@@ -44,16 +46,12 @@ public class Interface {
 
             BattleInterface battleInterfacePlayer1 = new BattleInterface(player1, player2, RED);
             BattleInterface battleInterfacePlayer2 = new BattleInterface(player2, player1, BLUE);
-            Player activePlayer = player1.getMonsters()[0].getSpeed() >= player2.getMonsters()[0].getSpeed() ? player1 : player2;
-            while (activePlayer.canPlay()) {
+            while (player1.hasAvailableMonsters() && player2.hasAvailableMonsters()) {
                 clearConsole();
-                if (activePlayer == player1) {
-                    battleInterfacePlayer1.battleInterface();
-                    activePlayer = player2;
-                } else {
-                    battleInterfacePlayer2.battleInterface();
-                    activePlayer = player1;
-                }
+                Action actionPlayer1 = battleInterfacePlayer1.battleInterface();
+                clearConsole();
+                Action actionPlayer2 = battleInterfacePlayer2.battleInterface();
+                GameActions.doBattleActions(actionPlayer1, actionPlayer2);
             }
 
         }
