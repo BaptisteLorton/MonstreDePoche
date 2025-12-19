@@ -15,12 +15,14 @@ public class InsectMonster extends NatureMonster {
 
     @Override
     public void attack(Monster target, Attack attack) {
-        int damage = attack.getPower();
-        if (target instanceof GroundMonster){
-            damage = attack.getPower()*2;
-        } else if (target instanceof FireMonster){
-            damage = attack.getPower()/2;
+        if (this.getHp() > 0) {
+            int damage = attack.getPower();
+            if (target instanceof GroundMonster){
+                damage = attack.getPower()*2;
+            } else if (target instanceof FireMonster){
+                damage = attack.getPower()/2;
+            }
+            target.receiveDamage(damage);
         }
-        target.receiveDamage(damage);
     }
 }

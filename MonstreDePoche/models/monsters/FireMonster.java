@@ -15,12 +15,14 @@ public class FireMonster extends Monster {
 
     @Override
     public void attack(Monster target, Attack attack) {
-        int damage = attack.getPower();
-        if (target instanceof GrassMonster){
-            damage = attack.getPower()*2;
-        } else if (target instanceof WaterMonster){
-            damage = attack.getPower()/2;
+        if (this.getHp() > 0) {
+            int damage = attack.getPower();
+            if (target instanceof GrassMonster){
+                damage = attack.getPower()*2;
+            } else if (target instanceof WaterMonster){
+                damage = attack.getPower()/2;
+            }
+            target.receiveDamage(damage);
         }
-        target.receiveDamage(damage);
     }
 }
