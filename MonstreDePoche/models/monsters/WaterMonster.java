@@ -13,6 +13,7 @@ public class WaterMonster extends Monster {
         this.type = Type.WATER;
     }
 
+    @Override
     public void attack(Monster target, Attack attack) {
         int damage = attack.getPower();
         if (target instanceof FireMonster){

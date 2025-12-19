@@ -13,6 +13,7 @@ public class InsectMonster extends NatureMonster {
         this.type = Type.INSECT;
     }
 
+    @Override
     public void attack(Monster target, Attack attack) {
         int damage = attack.getPower();
         if (target instanceof GroundMonster){

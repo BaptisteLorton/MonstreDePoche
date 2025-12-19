@@ -75,7 +75,7 @@ public class ChoiceInterface {
                     int index = Integer.parseInt(inputs[i]) - 1;
                     if (index >= 0 && index < monstersDex.length) {
                         chosenMonsters[i] = createMonster(monstersDex[index]);
-                        chosenMonsters[i].setAttacks(gerenateAttacks(chosenMonsters[i]));
+                        //chosenMonsters[i].setAttacks(gerenateAttacks(chosenMonsters[i]));
                     } else {
                         clearConsole();
                         System.out.println("Invalid monster number: " + inputs[i]);

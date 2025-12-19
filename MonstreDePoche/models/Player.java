@@ -19,6 +19,10 @@ public class Player {
         return activeMonster;
     }
 
+    public void setActiveMonster(Monster monster) {
+        this.activeMonster = monster;
+    }
+
     public Monster[] getMonsters() {
         return monsters;
     }
