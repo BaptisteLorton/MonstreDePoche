@@ -92,4 +92,12 @@ public class Monster {
     public Attack[] getAttacks() {
         return attacks;
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setAttacks(Attack[] attacks) {
+        this.attacks = attacks;
+    }
 }

@@ -6,5 +6,7 @@ public enum Type{
     GRASS,
     INSECT,
     ELECTRIC,
-    GROUND
+    GROUND,
+    NATURE,
+    NORMAL
 }
