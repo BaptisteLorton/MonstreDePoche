@@ -1,6 +1,2 @@
-bin/MonstreDePoche/interfaces/ChoiceInterface.class
-bin/MonstreDePoche/interfaces/ChoiceInterface$1.class
-bin/MonstreDePoche/interfaces/Interface$1.class
-bin/MonstreDePoche/models/monsters/InsectMonster.class
-bin/MonstreDePoche/models/monsters/NatureMonster.class
-sources.txt
+bin/
+*.class

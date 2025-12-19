@@ -1,0 +1,143 @@
+Attack
+    Name Eclair
+    Type Electric
+    Power 40
+    NbUse 10
+    Fail 0.07
+EndAttack
+
+Attack
+    Name Croc éclair
+    Type Electric
+    Power 55
+    NbUse 15
+    Fail 0.07
+EndAttack
+
+Attack
+    Name Coup de jus
+    Type Electric
+    Power 20
+    NbUse 30
+    Fail 0.02
+EndAttack
+
+Attack
+    Name Charge
+    Type Normal
+    Power 35
+    NbUse 15
+    Fail 0.03
+EndAttack
+
+Attack
+    Name Ultralaser
+    Type Normal
+    Power 130
+    NbUse 5
+    Fail 0.03
+EndAttack
+
+Attack
+    Name Trempette
+    Type Normal
+    Power 0
+    NbUse 10
+    Fail 0.03
+EndAttack
+
+Attack
+    Name Lance flame
+    Type Fire
+    Power 50
+    NbUse 10
+    Fail 0.03
+EndAttack
+
+Attack
+    Name Tornade de feu 
+    Type Fire
+    Power 30
+    NbUse 15
+    Fail 0.05
+EndAttack
+
+Attack
+    Name Roue de feu 
+    Type Fire
+    Power 75
+    NbUse 15
+    Fail 0.02
+EndAttack
+
+Attack
+    Name Hydrocanon
+    Type Water
+    Power 120
+    NbUse 5
+    Fail 0.05
+EndAttack
+
+Attack
+    Name UnPetitRicard?
+    Type Water
+    Power 150
+    NbUse 1
+    Fail 0.50
+EndAttack
+
+Attack
+    Name Surf
+    Type Water
+    Power 55
+    NbUse 15
+    Fail 0.02
+EndAttack
+
+Attack
+    Name Fouet liane
+    Type Nature
+    Power 30
+    NbUse 15
+    Fail 0.01
+EndAttack
+
+Attack
+    Name Balle graine
+    Type Nature
+    Power 55
+    NbUse 30
+    Fail 0.02
+EndAttack
+
+Attack
+    Name Trempette verte
+    Type Nature
+    Power 75
+    NbUse 10
+    Fail 0.05
+EndAttack
+
+Attack
+    Name Séisme
+    Type Ground
+    Power 75
+    NbUse 10
+    Fail 0.05
+EndAttack
+
+Attack
+    Name Lance caillou
+    Type Ground
+    Power 30
+    NbUse 15
+    Fail 0.02
+EndAttack
+
+Attack
+    Name Roulade
+    Type Ground
+    Power 30
+    NbUse 15
+    Fail 0.02
+EndAttack

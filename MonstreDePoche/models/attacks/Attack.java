@@ -7,7 +7,7 @@ public class Attack {
     public int power;
     public int nbUse;
     public float fail;
-
+    
     public Attack(String name, Type type, int power, int nbUse, float fail) {
         this.name = name;
         this.type = type;
