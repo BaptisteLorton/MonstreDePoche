@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import MonstreDePoche.models.monsters.Monster;
 import MonstreDePoche.models.monsters.MonsterChoice;
 import MonstreDePoche.models.Type;
 
@@ -42,6 +41,8 @@ public class MonsterDex {
                 int atkMin = 0, atkMax = 0;
                 int defMin = 0, defMax = 0;
                 int spdMin = 0, spdMax = 0;
+
+                String carateristiqe_special ="";
 
                 // Boucle avec index 'i' pour pouvoir sauter des lignes si besoin
                 for (int i = 0; i < lines.length; i++) {
@@ -91,19 +92,14 @@ public class MonsterDex {
                             }
                         }
                     }
+                    else{
+                        carateristiqe_special += line + "\n";
+                        //System.out.println(carateristiqe_special);
+                    }
                 }
 
                 if (!name.isEmpty()) {
-                    //System.out.println("------------------------------------------------");
-                    //System.out.println("Monstre : " + name + " (" + type + ")");
-                    //System.out.println("HP: " + hpMin + "-" + hpMax + " | Atk: " + atkMin + "-" + atkMax);
-                    //System.out.println("Def: " + defMin + "-" + defMax + " | Spd: " + spdMin + "-" + spdMax);
-                    
-                    tempDexList.add(new MonsterChoice(name, Type.valueOf(type.toUpperCase()), hpMax, hpMin, atkMax, atkMin, defMax, defMin, spdMax, spdMin));
-
-                    // Création de l'objet (Vérifiez votre constructeur Monster !)
-                    // Monster m = new Monster(name, type, hpMin, hpMax, atkMin, atkMax, defMin, defMax, spdMin, spdMax);
-                    // tempDexList.add(m);
+                    tempDexList.add(new MonsterChoice(name, Type.valueOf(type.toUpperCase()), hpMax, hpMin, atkMax, atkMin, defMax, defMin, spdMax, spdMin, carateristiqe_special));
                 }
             }
         } catch (IOException e) {

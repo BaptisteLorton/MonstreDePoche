@@ -138,7 +138,7 @@ public class AttacksDex {
             }
             return attacks;
         }
-        else if(monster.getType()==Type.NATURE){
+        else if(monster.getType()==Type.GRASS || monster.getType()==Type.INSECT){
             for (int i = 0; i < 2; i++) {
                 int randomIndex = random.nextInt(attacks_nature.size());
                 attacks[i] = attacks_nature.get(randomIndex);

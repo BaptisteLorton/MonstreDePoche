@@ -16,6 +16,7 @@ public class Monster {
     public int speed;
     public Attack[] attacks;
     public Effect currentEffect;
+    public String caracteristicSpecial;
 
     public Monster(String name, int hp, int attack, int defense, int speed, Attack[] attacks) {
         this.name = name;
@@ -32,7 +33,8 @@ public class Monster {
         this.hp = this.hp_max;
         this.attack = choice.getRandomAttack();
         this.defense = choice.getRandomDefense();
-        this.speed = choice.getRandomSpeed();    
+        this.speed = choice.getRandomSpeed();  
+        this.caracteristicSpecial = choice.getCaracteristicSpecial();  
     }
 
     @Override
