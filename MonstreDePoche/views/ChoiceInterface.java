@@ -14,7 +14,7 @@ import MonstreDePoche.models.monsters.InsectMonster;
 import MonstreDePoche.models.monsters.Monster;
 import MonstreDePoche.models.monsters.MonsterChoice;
 import MonstreDePoche.models.monsters.WaterMonster;
-
+import MonstreDePoche.controllers.AttacksDex;
 public class ChoiceInterface {
 
     Player player;
@@ -75,7 +75,7 @@ public class ChoiceInterface {
                     int index = Integer.parseInt(inputs[i]) - 1;
                     if (index >= 0 && index < monstersDex.length) {
                         chosenMonsters[i] = createMonster(monstersDex[index]);
-                        chosenMonsters[i].setAttacks(gerenateAttacks(chosenMonsters[i]));
+                        chosenMonsters[i].setAttacks(AttacksDex.gerenateAttacks(chosenMonsters[i]));
                     } else {
                         clearConsole();
                         System.out.println("Invalid monster number: " + inputs[i]);
