@@ -1,0 +1,3 @@
+- Faire les effets
+- Vérifier tous les interractions et finir les attaques (utilisation de la défense, attaques de base, etc...)
+- Faire la classe Medicine

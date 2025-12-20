@@ -1,13 +1,13 @@
 package MonstreDePoche.views;
 
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import static MonstreDePoche.views.ConsoleEffects.*;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.actions.*;
 import MonstreDePoche.models.monsters.Monster;
 import static MonstreDePoche.controllers.GameActions.*;
+import MonstreDePoche.models.objects.ObjectToUse;
 
 public class BattleInterface {
     private String color;
@@ -96,7 +96,12 @@ public class BattleInterface {
             string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3].getName() + "\n";
             string += "5 - Back to main menu\n";
         } else if (page == 2){
-            string += "TDB";
+            string += "Choose an item:\n";
+            ObjectToUse[] objects = activePlayer.getObjects().toArray(new ObjectToUse[0]);
+            for(int i = 0; i < objects.length; i++){
+                string += (i + 1) + " - " + objects[i].getInformation() + "\n";
+            }
+            string += (objects.length + 1) + " - Back to main menu\n";
         } else if(page == 3){
             string += "Choose a monster to switch to:\n";
             Monster[] monsters = getAvailableMonsters(activePlayer);
@@ -161,8 +166,28 @@ public class BattleInterface {
                     clearConsole();
                     break;
                 case "2":
-                    System.out.println("Use Item selected. (Functionality not implemented yet)");
-                    return null;
+                    clearConsole();
+                    boolean validUseItem = false;
+                    while (!validUseItem) {
+                        System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+                        System.out.println(showMonsters());
+                        System.out.println(showMenu(2));
+                        System.out.print(">");
+                        input = scanner.nextLine();
+                        if (Integer.parseInt(input) == activePlayer.getObjects().size() + 1) {
+                            clearConsole();
+                            break;
+                        }
+                        if (Integer.parseInt(input) < 1 || Integer.parseInt(input) > activePlayer.getObjects().size() + 1) {
+                            clearConsole();
+                            System.out.println("Invalid input. Please enter a number corresponding to your choice.");
+                        } else {
+                            String message = "\n" + activePlayer.getName() + " used " + activePlayer.getObjects().get(Integer.parseInt(input)-1).getName() + "!";;
+                            validUseItem = true;
+                            return new UseObjectAction(activePlayer, Integer.parseInt(input)-1, message);
+                        }
+                    }
+                    break;
                 case "3":
                     clearConsole();
                     if (activePlayer.getActiveMonster().getHp() <= 0) {

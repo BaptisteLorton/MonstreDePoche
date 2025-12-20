@@ -35,13 +35,17 @@ public class Interface {
             clearConsole();
             Player player2 = new Player(input);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/resource/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/resource/list_monsters.txt");
 
             ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex, RED);
             choiceInterfacePlayer1.chooseMonstersInterface();
             clearConsole();
+            choiceInterfacePlayer1.chooseObjectsInterface();
+            clearConsole();
             ChoiceInterface choiceInterfacePlayer2 = new ChoiceInterface(player2, monsterDex, BLUE);
             choiceInterfacePlayer2.chooseMonstersInterface();
+            clearConsole();
+            choiceInterfacePlayer2.chooseObjectsInterface();
 
             AudioManager.stopMusic();
             AudioManager.playMusic("MonstreDePoche/resource/battle_music.wav");
@@ -77,9 +81,9 @@ public class Interface {
             if (actionPlayer1 instanceof SurrenderAction && actionPlayer2 instanceof SurrenderAction){
                 System.out.println("\nBoth players have surrendered! It's a draw!");
             } else if (player1.hasAvailableMonsters() || actionPlayer2 instanceof SurrenderAction) {
-                System.out.println(RED + player1.getName() + " wins the battle!");
+                System.out.println(RED + player1.getName() + RESET + " wins the battle!");
             } else {
-                System.out.println(BLUE + player2.getName() + " wins the battle!");
+                System.out.println(BLUE + player2.getName() + RESET + " wins the battle!");
             }
             AudioManager.stopMusic();
         }
