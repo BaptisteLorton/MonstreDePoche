@@ -8,5 +8,9 @@ public class EffectBurn extends Effect {
         // pour le pourcentage d'effectuer une brulure, on fait la moyenne entre le rateOfEffect passé en paramètre et un nombre aléatoire entre 10% et 90%
         super(name, (rateOfEffect + (0.10 + (Math.random() * (0.90 - 0.10))))/2);
     }
+
+    public EffectBurn() {
+
+    }
     
 }

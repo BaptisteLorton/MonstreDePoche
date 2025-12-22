@@ -1,7 +1,7 @@
 Attack
     Name Eclair
     Type Electric
-    Power 40
+    Power 20
     NbUse 10
     Fail 0.07
 EndAttack
@@ -9,7 +9,7 @@ EndAttack
 Attack
     Name Croc éclair
     Type Electric
-    Power 55
+    Power 12
     NbUse 15
     Fail 0.07
 EndAttack
@@ -17,7 +17,7 @@ EndAttack
 Attack
     Name Coup de jus
     Type Electric
-    Power 20
+    Power 10
     NbUse 30
     Fail 0.02
 EndAttack
@@ -25,7 +25,7 @@ EndAttack
 Attack
     Name Charge
     Type Normal
-    Power 35
+    Power 10
     NbUse 15
     Fail 0.03
 EndAttack
@@ -33,7 +33,7 @@ EndAttack
 Attack
     Name Ultralaser
     Type Normal
-    Power 130
+    Power 50
     NbUse 5
     Fail 0.03
 EndAttack
@@ -49,7 +49,7 @@ EndAttack
 Attack
     Name Lance flame
     Type Fire
-    Power 50
+    Power 10
     NbUse 10
     Fail 0.03
 EndAttack
@@ -57,7 +57,7 @@ EndAttack
 Attack
     Name Tornade de feu 
     Type Fire
-    Power 30
+    Power 10
     NbUse 15
     Fail 0.05
 EndAttack
@@ -65,7 +65,7 @@ EndAttack
 Attack
     Name Roue de feu 
     Type Fire
-    Power 75
+    Power 20
     NbUse 15
     Fail 0.02
 EndAttack
@@ -73,7 +73,7 @@ EndAttack
 Attack
     Name Hydrocanon
     Type Water
-    Power 120
+    Power 55
     NbUse 5
     Fail 0.05
 EndAttack
@@ -89,7 +89,7 @@ EndAttack
 Attack
     Name Surf
     Type Water
-    Power 55
+    Power 10
     NbUse 15
     Fail 0.02
 EndAttack
@@ -97,7 +97,7 @@ EndAttack
 Attack
     Name Fouet liane
     Type Nature
-    Power 30
+    Power 12
     NbUse 15
     Fail 0.01
 EndAttack
@@ -105,7 +105,7 @@ EndAttack
 Attack
     Name Balle graine
     Type Nature
-    Power 55
+    Power 15
     NbUse 30
     Fail 0.02
 EndAttack
@@ -113,7 +113,7 @@ EndAttack
 Attack
     Name Trempette verte
     Type Nature
-    Power 75
+    Power 50
     NbUse 10
     Fail 0.05
 EndAttack
@@ -121,7 +121,7 @@ EndAttack
 Attack
     Name Séisme
     Type Ground
-    Power 75
+    Power 50
     NbUse 10
     Fail 0.05
 EndAttack
@@ -129,7 +129,7 @@ EndAttack
 Attack
     Name Lance caillou
     Type Ground
-    Power 30
+    Power 10
     NbUse 15
     Fail 0.02
 EndAttack
@@ -137,7 +137,7 @@ EndAttack
 Attack
     Name Roulade
     Type Ground
-    Power 30
+    Power 10
     NbUse 15
     Fail 0.02
 EndAttack

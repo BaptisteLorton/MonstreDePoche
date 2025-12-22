@@ -2,9 +2,17 @@ package MonstreDePoche.models.monsters;
 
 import static MonstreDePoche.views.ConsoleEffects.*;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 import MonstreDePoche.models.Type;
 import MonstreDePoche.models.Effects.Effect;
+import MonstreDePoche.models.Effects.EffectBurn;
 import MonstreDePoche.models.attacks.Attack;
+import MonstreDePoche.models.Effects.EffectParalyze;
+import MonstreDePoche.models.Effects.EffectPoison;
+
+
 
 public class Monster {
     public String name;
@@ -34,7 +42,8 @@ public class Monster {
         this.attack = choice.getRandomAttack();
         this.defense = choice.getRandomDefense();
         this.speed = choice.getRandomSpeed();  
-        this.caracteristicSpecial = choice.getCaracteristicSpecial();  
+        this.caracteristicSpecial = choice.getCaracteristicSpecial();
+        this.currentEffect = null;  
     }
 
     @Override
@@ -67,7 +76,18 @@ public class Monster {
     }
 
     public String getName() {
-        return name;
+        if (currentEffect instanceof EffectParalyze) {
+            return name + " (Paralyzed)";
+        }
+        else if (currentEffect instanceof EffectBurn) {
+            return name + " (Burned)";    
+        }
+        else if(currentEffect instanceof EffectPoison){
+            return name + " (Poisoned)";
+        }
+        else{
+            return name;
+        }
     }
 
     public int getSpeed() {
@@ -105,4 +125,58 @@ public class Monster {
     public void setAttacks(Attack[] attacks) {
         this.attacks = attacks;
     }
+
+    public boolean receiveParalysis(String car) {
+        String[] temp = car.split(" ");
+
+        double chance = Double.parseDouble(temp[1]);
+        if (Math.random() < chance) {
+           return true;
+        } else {
+           return false;
+        }   
+    }
+
+    public boolean receiveBurn(String car){
+        String[] temp = car.split(" ");
+        double valeur = ThreadLocalRandom.current().nextDouble(0.10, 0.50);
+        double chance = (Double.parseDouble(temp[1])*valeur)/2; //moy entra la stat du monstre et une valeur aleatoire entre 0.10 et 0.50
+
+        double statBurn = ThreadLocalRandom.current().nextDouble(0.0, 0.70); 
+
+        //si chance > à statBurn alors le monstre est brulé
+        if (chance > statBurn){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean receivePoison(){
+        double valeur = ThreadLocalRandom.current().nextDouble(0.01, 0.99);
+        //si chance < à 0.33 (une chance sur 3) alors le monstre est empoisonné
+        if (valeur <= 0.33){
+            return true;
+        } else {
+            return false;
+        }
+    }
+        
+    /* 
+    public void tryClearParalysis() {      
+        if (this.currentEffect instanceof EffectParalyze) {
+            Random random = new Random();
+            EffectParalyze paralyze = (EffectParalyze) this.currentEffect;
+            int resultat = random.nextInt(paralyze.paralyseDuration);
+            if (resultat==0){
+                this.currentEffect = null;
+                System.out.println(this.name + " is no longer paralyzed!");
+                return;
+            }
+            else{
+                System.out.println(this.name + " is still paralyzed!");
+            }
+        }
+    }*/
+
 }

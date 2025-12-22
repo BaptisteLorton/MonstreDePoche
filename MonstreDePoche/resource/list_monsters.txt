@@ -5,7 +5,7 @@ Monster
     Speed 110 141
     Attack 75 106
     Defense 50 82
-    Paralysis 0.2
+    Paralysis 0.8
 EndMonster
 Monster
     Name Dracafeu
