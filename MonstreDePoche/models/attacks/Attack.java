@@ -35,4 +35,8 @@ public class Attack {
     public float getFail() {
         return fail;
     }
+
+    public void increasePower(int powerBoost) {
+        this.power += powerBoost;
+    }
 }

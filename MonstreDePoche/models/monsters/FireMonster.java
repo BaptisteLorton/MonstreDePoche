@@ -49,13 +49,15 @@ public class FireMonster extends Monster {
                             System.out.println(" Burn failed");
                         }
                     }
-                    int damage = attack.getPower();
-                    if (target instanceof GrassMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof WaterMonster){
-                        damage = attack.getPower()/2;
+                    if (this.getHp() > 0) {
+                        int damage = attack.getPower();
+                        if (target instanceof GrassMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof WaterMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
                     }
-                    target.receiveDamage(damage);
                     }
 
             }
@@ -67,26 +69,30 @@ public class FireMonster extends Monster {
 
 
 
-            int damage = attack.getPower();
-                    if (target instanceof GrassMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof WaterMonster){
-                        damage = attack.getPower()/2;
-                    }
-                    target.receiveDamage(damage);
+            if (this.getHp() > 0) {
+                int damage = attack.getPower();
+                if (target instanceof GrassMonster){
+                    damage = attack.getPower()*2;
+                } else if (target instanceof WaterMonster){
+                    damage = attack.getPower()/2;
+                }
+                target.receiveDamage(damage);
+            }
         }
         else if(this.currentEffect instanceof EffectPoison){
             int damagePoison = this.attack /10;
             this.receiveDamage(damagePoison);
             System.out.println(this.name + " is affected by poison and loses " + damagePoison + " HP.");
                
-            int damage = attack.getPower();
+            if (this.getHp() > 0) {
+                    int damage = attack.getPower();
                     if (target instanceof GrassMonster){
                         damage = attack.getPower()*2;
                     } else if (target instanceof WaterMonster){
                         damage = attack.getPower()/2;
                     }
                     target.receiveDamage(damage);
+                }
 
         }
             else{
@@ -100,15 +106,15 @@ public class FireMonster extends Monster {
                             System.out.println(" Burn failed");
                         }
                     }
-                    int damage = attack.getPower();
-                    if (target instanceof GrassMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof WaterMonster){
-                        damage = attack.getPower()/2;
+                    if (this.getHp() > 0) {
+                        int damage = attack.getPower();
+                        if (target instanceof GrassMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof WaterMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
                     }
-                    target.receiveDamage(damage);
                 }
-                    
-                
     }
 }

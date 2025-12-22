@@ -19,7 +19,6 @@ public class ElectricMonster extends Monster {
 
     @Override
     public void attack(Monster target, Attack attack) {
-
         if(this.currentEffect instanceof EffectParalyze){
             System.out.println(this.name + " is affected by paralysis.");
             EffectParalyze paralyse = (EffectParalyze) this.currentEffect;
@@ -48,13 +47,15 @@ public class ElectricMonster extends Monster {
                             System.out.println(" paralysis failed");
                         }
                     }
-                    int damage = attack.getPower();
-                    if (target instanceof WaterMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof GroundMonster){
-                        damage = attack.getPower()/2;
+                    if (this.getHp() > 0) {
+                        int damage = attack.getPower();
+                        if (target instanceof WaterMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GroundMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
                     }
-                    target.receiveDamage(damage);
                     }
 
                 return;
@@ -65,26 +66,30 @@ public class ElectricMonster extends Monster {
             this.receiveDamage(damageBurn);
             System.out.println(this.name + " is affected by burn and loses " + damageBurn + " HP.");
 
-            int damage = attack.getPower();
-            if (target instanceof WaterMonster){
-                damage = attack.getPower()*2;
-            } else if (target instanceof GroundMonster){
-                        damage = attack.getPower()/2;
+            if (this.getHp() > 0) {
+                int damage = attack.getPower();
+                if (target instanceof WaterMonster){
+                    damage = attack.getPower()*2;
+                } else if (target instanceof GroundMonster){
+                    damage = attack.getPower()/2;
+                }
+                target.receiveDamage(damage);
             }
-            target.receiveDamage(damage);
         }
         else if(this.currentEffect instanceof EffectPoison){
             int damagePoison = this.attack /10;
             this.receiveDamage(damagePoison);
             System.out.println(this.name + " is affected by poison and loses " + damagePoison + " HP.");
                
-            int damage = attack.getPower();
-            if (target instanceof WaterMonster){
-                damage = attack.getPower()*2;
-            } else if (target instanceof GroundMonster){
+            if (this.getHp() > 0) {
+                    int damage = attack.getPower();
+                    if (target instanceof WaterMonster){
+                        damage = attack.getPower()*2;
+                    } else if (target instanceof GroundMonster){
                         damage = attack.getPower()/2;
-            }
-            target.receiveDamage(damage);
+                    }
+                    target.receiveDamage(damage);
+                }
 
         }
         else{
@@ -100,19 +105,16 @@ public class ElectricMonster extends Monster {
                         }
             }
 
-            int damage = attack.getPower();
-            if (target instanceof WaterMonster){
-                damage = attack.getPower()*2;
-            } else if (target instanceof GroundMonster){
-                        damage = attack.getPower()/2;
+            if (this.getHp() > 0) {
+                int damage = attack.getPower();
+                if (target instanceof WaterMonster){
+                    damage = attack.getPower()*2;
+                } else if (target instanceof GroundMonster){
+                    damage = attack.getPower()/2;
+                }
+                target.receiveDamage(damage);
             }
-            target.receiveDamage(damage);
                     
         }
-
-        
-
-
-        
     }
 }

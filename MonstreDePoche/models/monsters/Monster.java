@@ -179,4 +179,28 @@ public class Monster {
         }
     }*/
 
+    public void increaseHeal(int healBoost) {
+        this.hp += healBoost;
+        if (this.hp > this.hp_max) {
+            this.hp = this.hp_max;
+        }
+    }
+
+    public void increaseAttack(int attackBoost) {
+        this.attack += attackBoost;
+    }
+
+    public void increaseAttacks(int attackBoost) {
+        for (Attack atk : this.attacks) {
+            atk.increasePower(attackBoost);
+        }
+    }
+
+    public void increaseDefense(int defenseBoost) {
+        this.defense += defenseBoost;
+    }
+
+    public void increaseSpeed(int speedBoost) {
+        this.speed += speedBoost;
+    }
 }

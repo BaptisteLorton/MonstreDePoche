@@ -49,14 +49,16 @@ public class InsectMonster extends NatureMonster {
                             System.out.println(" poison failed");
                         }
                     }
-                    int damage = attack.getPower();
-                    if (target instanceof GroundMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof FireMonster){
-                        damage = attack.getPower()/2;
+                    if (this.getHp() > 0) {
+                        int damage = attack.getPower();
+                        if (target instanceof GroundMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof FireMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
                     }
-                    target.receiveDamage(damage);
-                    }
+                }
             }
         }
         else if(this.currentEffect instanceof EffectBurn){
@@ -64,13 +66,15 @@ public class InsectMonster extends NatureMonster {
             this.receiveDamage(damageBurn);
             System.out.println(this.name + " is affected by burn and loses " + damageBurn + " HP.");
 
-            int damage = attack.getPower();
+            if (this.getHp() > 0) {
+                int damage = attack.getPower();
                 if (target instanceof GroundMonster){
                     damage = attack.getPower()*2;
                 } else if (target instanceof FireMonster){
                     damage = attack.getPower()/2;
                 }
                 target.receiveDamage(damage);
+            }
         }
         else if(this.currentEffect instanceof EffectPoison){
             int damagePoison = this.attack /10;
@@ -87,13 +91,15 @@ public class InsectMonster extends NatureMonster {
                         System.out.println(" poison failed");
                     }
                 }
-                int damage = attack.getPower();
-                if (target instanceof GroundMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof FireMonster){
-                    damage = attack.getPower()/2;
+                if (this.getHp() > 0) {
+                    int damage = attack.getPower();
+                    if (target instanceof GroundMonster){
+                        damage = attack.getPower()*2;
+                    } else if (target instanceof FireMonster){
+                        damage = attack.getPower()/2;
+                    }
+                    target.receiveDamage(damage);
                 }
-                target.receiveDamage(damage);
 
         }
         else{
@@ -107,13 +113,15 @@ public class InsectMonster extends NatureMonster {
                         System.out.println(" poison failed");
                     }
                 }
-                int damage = attack.getPower();
-                if (target instanceof GroundMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof FireMonster){
-                    damage = attack.getPower()/2;
+                if (this.getHp() > 0) {
+                    int damage = attack.getPower();
+                    if (target instanceof GroundMonster){
+                        damage = attack.getPower()*2;
+                    } else if (target instanceof FireMonster){
+                        damage = attack.getPower()/2;
+                    }
+                    target.receiveDamage(damage);
                 }
-                target.receiveDamage(damage);
-                }            
-    }
+            }
+        }            
 }

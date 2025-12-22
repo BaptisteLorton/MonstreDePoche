@@ -1,15 +1,13 @@
 package MonstreDePoche.views;
 
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import static MonstreDePoche.views.ConsoleEffects.*;
 import MonstreDePoche.models.Player;
-import MonstreDePoche.models.actions.ChangeMonsterAction;
+import MonstreDePoche.models.actions.*;
 import MonstreDePoche.models.monsters.Monster;
 import static MonstreDePoche.controllers.GameActions.*;
-import MonstreDePoche.models.actions.Action;
-import MonstreDePoche.models.actions.AttackAction;
+import MonstreDePoche.models.objects.ObjectToUse;
 
 public class BattleInterface {
     private String color;
@@ -98,7 +96,12 @@ public class BattleInterface {
             string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3].getName() + "\n";
             string += "5 - Back to main menu\n";
         } else if (page == 2){
-            string += "TDB";
+            string += "Choose an item:\n";
+            ObjectToUse[] objects = activePlayer.getObjects().toArray(new ObjectToUse[0]);
+            for(int i = 0; i < objects.length; i++){
+                string += (i + 1) + " - " + objects[i].getInformation() + "\n";
+            }
+            string += (objects.length + 1) + " - Back to main menu\n";
         } else if(page == 3){
             string += "Choose a monster to switch to:\n";
             Monster[] monsters = getAvailableMonsters(activePlayer);
@@ -113,7 +116,11 @@ public class BattleInterface {
                     }
                 }
             }
-            string += "3 - Back to main menu\n";
+            if (otherPlayer.getActiveMonster().getHp() <= 0) {
+                string += "3 - Keep current monster";
+            } else if (activePlayer.getActiveMonster().getHp() > 0) {
+                string += "3 - Back to main menu\n";
+            }
         }
         return string;
     }
@@ -121,17 +128,23 @@ public class BattleInterface {
     public Action battleInterface() {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
         while (true) {
+            System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
             System.out.println(showMonsters());
             System.out.println(showMenu(0));
-            System.out.print(">");
-            String input = scanner.nextLine();
+            String input;
+            if (activePlayer.getActiveMonster().getHp() <= 0 || otherPlayer.getActiveMonster().getHp() <= 0) {
+                input = "3";
+            } else {
+                System.out.print(">");
+                input = scanner.nextLine();
+            }
             switch (input) {
                 case "1":
                     clearConsole();
                     boolean validInput = false;
                     while (!validInput) {
+                        System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
                         System.out.println(showMonsters());
                         System.out.println(showMenu(1));
                         System.out.print(">");
@@ -145,7 +158,7 @@ public class BattleInterface {
                                 clearConsole();
                                 System.out.println("Invalid input. Please enter a number corresponding to your choice.");
                             } else {
-                                message = "\n" + color + activePlayer.getActiveMonster().getName() + RESET + " used " + activePlayer.getActiveMonster().getAttacks()[Integer.parseInt(input)-1].getName() + "!";
+                                message = "\n" + activePlayer.getActiveMonster().getColor() + activePlayer.getActiveMonster().getName() + RESET + " used " + activePlayer.getActiveMonster().getAttacks()[Integer.parseInt(input)-1].getName() + "!";
                                 return new AttackAction(activePlayer, otherPlayer, message, input);
                             }
                         }
@@ -153,19 +166,49 @@ public class BattleInterface {
                     clearConsole();
                     break;
                 case "2":
-                    System.out.println("Use Item selected. (Functionality not implemented yet)");
-                    return null;
+                    clearConsole();
+                    boolean validUseItem = false;
+                    while (!validUseItem) {
+                        System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+                        System.out.println(showMonsters());
+                        System.out.println(showMenu(2));
+                        System.out.print(">");
+                        input = scanner.nextLine();
+                        if (Integer.parseInt(input) == activePlayer.getObjects().size() + 1) {
+                            clearConsole();
+                            break;
+                        }
+                        if (Integer.parseInt(input) < 1 || Integer.parseInt(input) > activePlayer.getObjects().size() + 1) {
+                            clearConsole();
+                            System.out.println("Invalid input. Please enter a number corresponding to your choice.");
+                        } else {
+                            String message = "\n" + activePlayer.getName() + " used " + activePlayer.getObjects().get(Integer.parseInt(input)-1).getName() + "!";;
+                            validUseItem = true;
+                            return new UseObjectAction(activePlayer, Integer.parseInt(input)-1, message);
+                        }
+                    }
+                    break;
                 case "3":
                     clearConsole();
+                    if (activePlayer.getActiveMonster().getHp() <= 0) {
+                        System.out.println("Your active monster has fainted! You must switch to another monster.\n");
+                    } else {
+                        System.out.println("The opponent's active monster has fainted! You have the opportunity to switch to another monster.\n");
+                    }
                     String check = "start";
                     while (check != "") {
+                        System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
                         System.out.println(showMonsters());
                         System.out.println(showMenu(3));
                         System.out.print(">");
                         input = scanner.nextLine();
                         check = checkChangeMonster(activePlayer, Integer.parseInt(input)-1);
                         if (check == "") {
-                            if (input.equals("3")) {
+                            if (input.equals("3") && activePlayer.getActiveMonster().getHp() > 0) {
+                                if (otherPlayer.getActiveMonster().getHp() <= 0) {
+                                    String message = "\n" + color + activePlayer.getName() + RESET + " kept " + activePlayer.getActiveMonster().getName() + " as active monster!";
+                                    return new Action(activePlayer, message);
+                                }
                                 clearConsole();
                                 break;
                             }
@@ -178,6 +221,9 @@ public class BattleInterface {
                         clearConsole();
                     }
                     break;
+                case "4":
+                    String message = "\n" + color + activePlayer.getName() + RESET + " has surrendered!";
+                    return new SurrenderAction(activePlayer, message);
                 default:
                     System.out.println("Invalid input. Please enter a number corresponding to your choice.");
                     break;

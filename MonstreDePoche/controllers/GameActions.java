@@ -30,13 +30,17 @@ public class GameActions {
     }
 
     public static String checkChangeMonster(Player activePlayer, int monsterIndex) {
-        if (monsterIndex == 2) {
+        if (monsterIndex == 2 && activePlayer.getActiveMonster().getHp() > 0) {
             return "";
         }
         Monster[] monsters = getAvailableMonsters(activePlayer);
 
         if (monsterIndex < 0 || monsterIndex >= monsters.length) {
-            return "Invalid monster index!";
+            if (activePlayer.getActiveMonster().getHp() > 0) {
+                return "Invalid monster index!";
+            } else {
+                return "You must choose a monster to switch to!";
+            }
         } else if (monsters[monsterIndex].getHp() <= 0) {
             return "You cannot switch to a fainted monster!";
         } else if (monsters.length == 0) {
@@ -82,20 +86,24 @@ public class GameActions {
                 sleep(2000);
                 if (actionPlayer2.getPlayer().getActiveMonster().getHp() > 0) {
                     actionPlayer2.doAction();
+                    sleep(2000);
                 }
             } else {
                 actionPlayer2.doAction();
                 sleep(2000);
                 if (actionPlayer1.getPlayer().getActiveMonster().getHp() > 0) {
                     actionPlayer1.doAction();
+                    sleep(2000);
                 }
             }
         } else {
             if (actionPlayer1 instanceof AttackAction){
                 actionPlayer1.doAction();
+                sleep(2000);
             }
             if (actionPlayer2 instanceof AttackAction){
                 actionPlayer2.doAction();
+                sleep(2000);
             }
         }
     }

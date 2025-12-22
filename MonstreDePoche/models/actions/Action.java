@@ -16,6 +16,7 @@ public class Action {
     }
 
     public void doAction() {
+        showActionMessage();
     }
 
     public void showActionMessage() {

@@ -1,11 +1,15 @@
 package MonstreDePoche.models;
 
+import java.util.ArrayList;
+
 import MonstreDePoche.models.monsters.Monster;
+import MonstreDePoche.models.objects.ObjectToUse;
 
 public class Player {
     private String name;
     private Monster activeMonster;
     private Monster[] monsters = new Monster[3];
+    private ArrayList<ObjectToUse> objects = new ArrayList<>();
 
     public Player(String name) {
         this.name = name;
@@ -30,6 +34,14 @@ public class Player {
     public void setMonsters(Monster[] monsters) {
         this.monsters = monsters;
         this.activeMonster = monsters[0];
+    }
+
+    public void setObjects(ArrayList<ObjectToUse> objects) {
+        this.objects = objects;
+    }
+
+    public ArrayList<ObjectToUse> getObjects() {
+        return objects;
     }
 
     public boolean canPlay() {
