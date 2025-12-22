@@ -77,6 +77,7 @@ public class GameActions {
         if (actionPlayer1 instanceof AttackAction && actionPlayer2 instanceof AttackAction){
             Player fastestPlayer = getFastestPlayerWithFastestMonster(actionPlayer1.getPlayer(), actionPlayer2.getPlayer());
             if (fastestPlayer == actionPlayer1.getPlayer()) {
+                
                 actionPlayer1.doAction();
                 sleep(2000);
                 if (actionPlayer2.getPlayer().getActiveMonster().getHp() > 0) {

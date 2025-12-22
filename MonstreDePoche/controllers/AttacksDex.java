@@ -27,7 +27,7 @@ public class AttacksDex {
 
         
         try {
-            String contenu = Files.readString(Paths.get("MonstreDePoche/resource/list_attaque.txt"));
+            String contenu = Files.readString(Paths.get("MonstreDePoche/MonstreDePoche/resource/list_attaque.txt"));
             contenu = contenu.replaceAll("<[^>]*>", "");
 
             String[] attacksRaw = contenu.split("EndAttack");
