@@ -35,7 +35,7 @@ public class Interface {
             clearConsole();
             Player player2 = new Player(input);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/resource/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/resource/list_monsters.txt");
 
             ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex, RED);
             choiceInterfacePlayer1.chooseMonstersInterface();
