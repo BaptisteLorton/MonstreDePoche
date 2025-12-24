@@ -9,6 +9,8 @@ import MonstreDePoche.models.Effects.EffectParalyze;
 import MonstreDePoche.models.Effects.EffectPoison;
 
 public class GroundMonster extends Monster {
+    private int nbrTunnel;
+    private boolean wasInTunnel;
     public GroundMonster(String name, int hp, int attack, int defense, int speed, Attack[] attacks) {
         super(name, hp, attack, defense, speed, attacks);
         this.type = Type.GROUND;
@@ -17,6 +19,8 @@ public class GroundMonster extends Monster {
     public GroundMonster(MonsterChoice choice) {
         super(choice);
         this.type = Type.GROUND;
+        this.nbrTunnel=0;
+        this.wasInTunnel=false;
     }
 
     @Override
@@ -40,6 +44,14 @@ public class GroundMonster extends Monster {
                 else{
                     System.out.println(this.name + " Succed attack!");
                     if (this.getHp() > 0) {
+                    int nbrTourTunnel;
+                    if(this.wasInTunnel==false){
+                        nbrTourTunnel = goTunnel();
+                        if(nbrTourTunnel !=0){
+                            this.nbrTunnel=nbrTourTunnel;
+                            this.wasInTunnel=true;
+                            this.defense +=20;
+                        }
                         int damage = attack.getPower();
                         if (target instanceof ElectricMonster){
                             damage = attack.getPower()*2;
@@ -47,7 +59,26 @@ public class GroundMonster extends Monster {
                             damage = attack.getPower()/2;
                         }
                         target.receiveDamage(damage);
-                    }
+                    }else{
+
+                        int damage = attack.getPower();
+                        if (target instanceof ElectricMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GrassMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
+
+                        if(this.nbrTunnel!=0){
+                            this.nbrTunnel-=1;
+                        }
+                        else{
+                            this.wasInTunnel=false;
+                            this.defense -=20;
+                        }
+                        
+                    } 
+                }
                     }
 
             }
@@ -58,14 +89,41 @@ public class GroundMonster extends Monster {
             System.out.println(this.name + " is affected by burn and loses " + damageBurn + " HP.");
 
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof ElectricMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof GrassMonster){
-                    damage = attack.getPower()/2;
+                    int nbrTourTunnel;
+                    if(this.wasInTunnel==false){
+                        nbrTourTunnel = goTunnel();
+                        if(nbrTourTunnel !=0){
+                            this.nbrTunnel=nbrTourTunnel;
+                            this.wasInTunnel=true;
+                            this.defense +=20;
+                        }
+                        int damage = attack.getPower();
+                        if (target instanceof ElectricMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GrassMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
+                    }else{
+
+                        int damage = attack.getPower();
+                        if (target instanceof ElectricMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GrassMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
+
+                        if(this.nbrTunnel!=0){
+                            this.nbrTunnel-=1;
+                        }
+                        else{
+                            this.wasInTunnel=false;
+                            this.defense -=20;
+                        }
+                        
+                    }        
                 }
-                target.receiveDamage(damage);
-            }
         }
         else if(this.currentEffect instanceof EffectPoison){
             int damagePoison = this.attack /10;
@@ -73,25 +131,83 @@ public class GroundMonster extends Monster {
             System.out.println(this.name + " is affected by poison and loses " + damagePoison + " HP.");
                
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof ElectricMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof GrassMonster){
-                    damage = attack.getPower()/2;
-                }
-                target.receiveDamage(damage);
-        }
+                    int nbrTourTunnel;
+                    if(this.wasInTunnel==false){
+                        nbrTourTunnel = goTunnel();
+                        if(nbrTourTunnel !=0){
+                            this.nbrTunnel=nbrTourTunnel;
+                            this.wasInTunnel=true;
+                            this.defense +=20;
+                        }
+                        int damage = attack.getPower();
+                        if (target instanceof ElectricMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GrassMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
+                    }else{
 
+                        int damage = attack.getPower();
+                        if (target instanceof ElectricMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GrassMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
+
+                        if(this.nbrTunnel!=0){
+                            this.nbrTunnel-=1;
+                        }
+                        else{
+                            this.wasInTunnel=false;
+                            this.defense -=20;
+                        }
+                        
+                    }  
+                }
         }
         else{
                 if (this.getHp() > 0) {
-                    int damage = attack.getPower();
-                    if (target instanceof ElectricMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof GrassMonster){
-                        damage = attack.getPower()/2;
+                    int nbrTourTunnel;
+                    if(this.wasInTunnel==false){
+                        nbrTourTunnel = goTunnel();
+                        if(nbrTourTunnel !=0){
+                            this.nbrTunnel=nbrTourTunnel;
+                            this.wasInTunnel=true;
+                            this.defense +=20;
+                        }
+                        int damage = attack.getPower();
+                        if (target instanceof ElectricMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GrassMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
+                    }else{
+
+                        int damage = attack.getPower();
+                        if (target instanceof ElectricMonster){
+                            damage = attack.getPower()*2;
+                        } else if (target instanceof GrassMonster){
+                            damage = attack.getPower()/2;
+                        }
+                        target.receiveDamage(damage);
+
+                        if(this.nbrTunnel!=0){
+                            this.nbrTunnel-=1;
+                            System.out.println("nbrTourTunnel after decrease :"+this.nbrTunnel +1);
+                        }
+                        else{
+                            System.out.println( this.name + "leave the tunnel");
+                            this.wasInTunnel=false;
+                            this.defense -=20;
+                        }
+                        
                     }
-                    target.receiveDamage(damage);
+
+                    
+                    
                 }
                 }        
     }
