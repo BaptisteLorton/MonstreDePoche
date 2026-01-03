@@ -166,6 +166,7 @@ public class Monster {
         Random rand = new Random();
         int tirage = rand.nextInt(100);
         if (tirage<=5){
+            System.out.println( this.name + "enter in the tunnel");
             Random nbrTour = new Random();
             return nbrTour.nextInt(3)+1; // Génère un nombre aléatoire entre 1 et 3
         }
