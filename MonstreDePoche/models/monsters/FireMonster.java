@@ -56,6 +56,7 @@ public class FireMonster extends Monster {
                         } else if (target instanceof WaterMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }
                     }
@@ -76,6 +77,7 @@ public class FireMonster extends Monster {
                 } else if (target instanceof WaterMonster){
                     damage = attack.getPower()/2;
                 }
+                attack.useAttack();
                 target.receiveDamage(damage);
             }
         }
@@ -91,6 +93,7 @@ public class FireMonster extends Monster {
                     } else if (target instanceof WaterMonster){
                         damage = attack.getPower()/2;
                     }
+                    attack.useAttack();
                     target.receiveDamage(damage);
                 }
 
@@ -113,6 +116,7 @@ public class FireMonster extends Monster {
                         } else if (target instanceof WaterMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }
                 }

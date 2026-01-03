@@ -77,13 +77,13 @@ public class Monster {
 
     public String getName() {
         if (currentEffect instanceof EffectParalyze) {
-            return name + " (Paralyzed)";
+            return name + " (PAR)";
         }
         else if (currentEffect instanceof EffectBurn) {
-            return name + " (Burned)";    
+            return name + " (BURN)";    
         }
         else if(currentEffect instanceof EffectPoison){
-            return name + " (Poisoned)";
+            return name + " (POIS)";
         }
         else{
             return name;
@@ -137,6 +137,12 @@ public class Monster {
         }   
     }
 
+    public void cureParalysis() {
+        if (currentEffect instanceof EffectParalyze) {
+            currentEffect = null;
+        }
+    }
+
     public boolean receiveBurn(String car){
         String[] temp = car.split(" ");
         double valeur = ThreadLocalRandom.current().nextDouble(0.10, 0.50);
@@ -152,6 +158,12 @@ public class Monster {
         }
     }
 
+    public void cureBurn() {
+        if (currentEffect instanceof EffectBurn) {
+            currentEffect = null;
+        }
+    }
+
     public boolean receivePoison(){
         double valeur = ThreadLocalRandom.current().nextDouble(0.01, 0.99);
         //si chance <= à 0.33 (une chance sur 3) alors le monstre est empoisonné
@@ -159,6 +171,12 @@ public class Monster {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void curePoison() {
+        if (currentEffect instanceof EffectPoison) {
+            currentEffect = null;
         }
     }
 
@@ -174,8 +192,6 @@ public class Monster {
             return 0;
         }
     }
-        
-    
 
     public void increaseHeal(int healBoost) {
         this.hp += healBoost;

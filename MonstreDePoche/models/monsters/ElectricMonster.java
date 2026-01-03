@@ -54,6 +54,7 @@ public class ElectricMonster extends Monster {
                         } else if (target instanceof GroundMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }
                     }
@@ -73,6 +74,7 @@ public class ElectricMonster extends Monster {
                 } else if (target instanceof GroundMonster){
                     damage = attack.getPower()/2;
                 }
+                attack.useAttack();
                 target.receiveDamage(damage);
             }
         }
@@ -88,6 +90,7 @@ public class ElectricMonster extends Monster {
                     } else if (target instanceof GroundMonster){
                         damage = attack.getPower()/2;
                     }
+                    attack.useAttack();
                     target.receiveDamage(damage);
                 }
 
@@ -112,6 +115,7 @@ public class ElectricMonster extends Monster {
                 } else if (target instanceof GroundMonster){
                     damage = attack.getPower()/2;
                 }
+                attack.useAttack();
                 target.receiveDamage(damage);
             }
                     

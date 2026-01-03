@@ -1,3 +1,3 @@
-- Faire les effets
-- Vérifier tous les interractions et finir les attaques (utilisation de la défense, attaques de base, etc...)
-- Faire la classe Medicine
+- Mettre les prints des effets dans une interface (ou en tout cas ne pas les mettre dans attack car ça s'écrit trop vite et c'est pas beau)
+- Vérifier tous les interractions et finir les attaques (utilisation de la défense, attaques de base, formule de l'énnoncé, etc...)
+- Faire le médicament pour l'assèchement du terrain

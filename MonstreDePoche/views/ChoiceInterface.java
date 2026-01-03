@@ -88,7 +88,6 @@ public class ChoiceInterface {
                 clearConsole();
                 System.out.println("Please enter exactly three numbers.");
             }
-            System.out.println("\n---------------------------\n");
         }
     }
 
@@ -98,8 +97,9 @@ public class ChoiceInterface {
         objectsAvailable.add(new Potion("Attack Boost", 1, 0, 5, 0, 0));
         objectsAvailable.add(new Potion("Defense Boost", 1, 0, 0, 5, 0));
         objectsAvailable.add(new Potion("Speed Boost", 1, 0, 0, 0, 5));
-        objectsAvailable.add(new Medicine("Antidote", 1));
-        objectsAvailable.add(new Medicine("Paralysis Heal", 1));
+        objectsAvailable.add(new ParalyzeMedicine("Paralysis Heal", 1));
+        objectsAvailable.add(new BurnMedicine("Burn Heal", 1));
+        objectsAvailable.add(new PoisonMedicine("Poison Heal", 1));
         // Define Medicine objects
         return objectsAvailable;
     }

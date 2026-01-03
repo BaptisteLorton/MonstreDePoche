@@ -14,5 +14,4 @@ public class Medicine extends ObjectToUse {
         Medicine otherMedicine = (Medicine) other;
         return this.name.equals(otherMedicine.name);
     }
-    
 }

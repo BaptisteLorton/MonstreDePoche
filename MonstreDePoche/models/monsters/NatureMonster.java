@@ -19,6 +19,7 @@ public class NatureMonster extends Monster {
             } else if (target instanceof FireMonster){
                 damage = attack.getPower()/2;
             }
+            attack.useAttack();
             target.receiveDamage(damage);
         }
     }

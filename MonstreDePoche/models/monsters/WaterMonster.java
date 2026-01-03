@@ -22,6 +22,7 @@ public class WaterMonster extends Monster {
             } else if (target instanceof ElectricMonster){
                 damage = attack.getPower()/2;
             }
+            attack.useAttack();
             target.receiveDamage(damage);
         }
     }

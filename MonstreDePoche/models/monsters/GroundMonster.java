@@ -58,6 +58,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }else{
 
@@ -67,6 +68,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
 
                         if(this.nbrTunnel!=0){
@@ -103,6 +105,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }else{
 
@@ -112,6 +115,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
 
                         if(this.nbrTunnel!=0){
@@ -145,6 +149,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }else{
 
@@ -154,6 +159,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
 
                         if(this.nbrTunnel!=0){
@@ -183,6 +189,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }else{
 
@@ -192,6 +199,7 @@ public class GroundMonster extends Monster {
                         } else if (target instanceof GrassMonster){
                             damage = attack.getPower()/2;
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
 
                         if(this.nbrTunnel!=0){
