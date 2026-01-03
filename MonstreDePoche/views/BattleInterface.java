@@ -99,6 +99,9 @@ public class BattleInterface {
             string += "Choose an item:\n";
             ObjectToUse[] objects = activePlayer.getObjects().toArray(new ObjectToUse[0]);
             for(int i = 0; i < objects.length; i++){
+                if (objects[i].getQuantity() <= 0) {
+                    continue;
+                }
                 string += (i + 1) + " - " + objects[i].getInformation() + "\n";
             }
             string += (objects.length + 1) + " - Back to main menu\n";
