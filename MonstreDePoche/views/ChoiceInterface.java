@@ -100,6 +100,8 @@ public class ChoiceInterface {
         objectsAvailable.add(new ParalyzeMedicine("Paralysis Heal", 1));
         objectsAvailable.add(new BurnMedicine("Burn Heal", 1));
         objectsAvailable.add(new PoisonMedicine("Poison Heal", 1));
+        objectsAvailable.add(new Drought("Drought", 1));
+
         // Define Medicine objects
         return objectsAvailable;
     }
