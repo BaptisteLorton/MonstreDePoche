@@ -1,5 +1,6 @@
 package MonstreDePoche.models.monsters;
 import MonstreDePoche.models.attacks.Attack;
+import MonstreDePoche.models.attacks.StruggleAttack;
 import MonstreDePoche.views.Interface;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,16 +22,28 @@ public class WaterMonster extends Monster {
     }
 
     @Override
+    protected double getAvantage(Monster target, Attack attack){
+        if (attack.getType() == Type.WATER || attack instanceof StruggleAttack){
+            if (target instanceof FireMonster){
+                return 2.0;
+            } else if (target instanceof ElectricMonster){
+                return 0.5;
+            }
+        }
+        return 1.0;
+    }
+
+    @Override
     public void attack(Monster target, Attack attack) {
         if(this.currentEffect instanceof EffectBurn && Interface.land.flooded == true){
             this.currentEffect = null;
         }
         if (this.getHp() > 0) {
-            int damage = attack.getPower();
-            if (target instanceof FireMonster){
-                damage = attack.getPower()*2;
-            } else if (target instanceof ElectricMonster){
-                damage = attack.getPower()/2;
+            int damage;
+            if (attack instanceof StruggleAttack){
+                damage = getDamageStruggle(target, attack);
+            } else {
+                damage = getDamage(target, attack);
             }
             attack.useAttack();
             target.receiveDamage(damage);
@@ -57,12 +70,13 @@ public class WaterMonster extends Monster {
                     this.inondation(this.caracteristicSpecial);
                     }
                     if (this.getHp() > 0) {
-                        int damage = attack.getPower();
-                        if (target instanceof FireMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof ElectricMonster){
-                            damage = attack.getPower()/2;
+                        int damage;
+                        if (attack instanceof StruggleAttack){
+                            damage = getDamageStruggle(target, attack);
+                        } else {
+                            damage = getDamage(target, attack);
                         }
+                        attack.useAttack();
                         target.receiveDamage(damage);
                     }
                     }
@@ -74,18 +88,17 @@ public class WaterMonster extends Monster {
             this.receiveDamage(damageBurn);
             System.out.println(this.name + " is affected by burn and loses " + damageBurn + " HP.");
 
-
-
             if(attack.getType() == Type.WATER){
             this.inondation(this.caracteristicSpecial);
             }
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof FireMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof ElectricMonster){
-                    damage = attack.getPower()/2;
+                int damage;
+                if (attack instanceof StruggleAttack){
+                    damage = getDamageStruggle(target, attack);
+                } else {
+                    damage = getDamage(target, attack);
                 }
+                attack.useAttack();
                 target.receiveDamage(damage);
             }
         }
@@ -98,29 +111,29 @@ public class WaterMonster extends Monster {
             this.inondation(this.caracteristicSpecial);
             }
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof FireMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof ElectricMonster){
-                    damage = attack.getPower()/2;
+                int damage;
+                if (attack instanceof StruggleAttack){
+                    damage = getDamageStruggle(target, attack);
+                } else {
+                    damage = getDamage(target, attack);
                 }
+                attack.useAttack();
                 target.receiveDamage(damage);
             }
-
-        }
-            else{
-                if(attack.getType() == Type.WATER){
-            this.inondation(this.caracteristicSpecial);
+        } else {
+            if(attack.getType() == Type.WATER){
+                this.inondation(this.caracteristicSpecial);
             }
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof FireMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof ElectricMonster){
-                    damage = attack.getPower()/2;
+                int damage;
+                if (attack instanceof StruggleAttack){
+                    damage = getDamageStruggle(target, attack);
+                } else {
+                    damage = getDamage(target, attack);
                 }
+                attack.useAttack();
                 target.receiveDamage(damage);
             }
-                }
+        }
     }
 }

@@ -6,7 +6,6 @@ import MonstreDePoche.models.attacks.StruggleAttack;
 import java.util.concurrent.ThreadLocalRandom;
 
 import MonstreDePoche.models.Type;
-import MonstreDePoche.models.Effects.Effect;
 import MonstreDePoche.models.Effects.EffectBurn;
 import MonstreDePoche.models.Effects.EffectParalyze;
 import MonstreDePoche.models.Effects.EffectPoison;
