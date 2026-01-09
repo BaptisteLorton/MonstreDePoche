@@ -8,11 +8,13 @@ import MonstreDePoche.models.actions.*;
 import MonstreDePoche.models.monsters.Monster;
 import static MonstreDePoche.controllers.GameActions.*;
 import MonstreDePoche.models.objects.ObjectToUse;
+import MonstreDePoche.models.Land;
 
 public class BattleInterface {
     private String color;
     private final Player activePlayer;
     private final Player otherPlayer;
+    
 
     public BattleInterface(Player activePlayer, Player otherPlayer, String color) {
         this.activePlayer = activePlayer;
@@ -130,9 +132,11 @@ public class BattleInterface {
 
     public Action battleInterface() {
         Scanner scanner = new Scanner(System.in);
-        
         while (true) {
             System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+            if(Interface.land.flooded == true){
+                System.out.println(YELLOW + "The land is currently flooded ! " + RESET);
+            }
             System.out.println(showMonsters());
             System.out.println(showMenu(0));
             String input;
@@ -153,6 +157,9 @@ public class BattleInterface {
                     boolean validInput = false;
                     while (!validInput) {
                         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+                        if(Interface.land.flooded == true){
+                            System.out.println(YELLOW + "The land is currently flooded ! " + RESET);
+                        }
                         System.out.println(showMonsters());
                         System.out.println(showMenu(1));
                         System.out.print(">");
@@ -178,6 +185,9 @@ public class BattleInterface {
                     boolean validUseItem = false;
                     while (!validUseItem) {
                         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+                        if(Interface.land.flooded == true){
+                            System.out.println(YELLOW + "The land is currently flooded ! " + RESET);
+                        }
                         System.out.println(showMonsters());
                         System.out.println(showMenu(2));
                         System.out.print(">");
@@ -206,6 +216,9 @@ public class BattleInterface {
                     String check = "start";
                     while (check != "") {
                         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+                        if(Interface.land.flooded == true){
+                            System.out.println(YELLOW + "The land is currently flooded ! " + RESET);
+                        }
                         System.out.println(showMonsters());
                         System.out.println(showMenu(3));
                         System.out.print(">");

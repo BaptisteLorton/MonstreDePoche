@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 import MonstreDePoche.controllers.AudioManager;
 import MonstreDePoche.controllers.MonsterDex;
+import MonstreDePoche.models.Land;
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.monsters.MonsterChoice;
-import MonstreDePoche.models.actions.Action;
 import MonstreDePoche.controllers.GameActions;
 import MonstreDePoche.models.actions.*;
 import static MonstreDePoche.controllers.GameActions.sleep;
 
 public class Interface {
-
+    public static Land land = new Land(false,0,0);
     public void start() {
         Scanner scanner = new Scanner(System.in);
         clearConsole();
