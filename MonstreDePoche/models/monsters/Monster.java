@@ -147,25 +147,6 @@ public class Monster {
         }   
     }
 
-    public void inondation(String car){
-        //System.out.println(car);
-        String[] temp = car.split("\n");
-        String[] temp2 = temp[0].split(" ");
-        String[] temp3 = temp[1].split(" ");
-        double  floodvalue = Double.parseDouble(temp2[1])*100;
-        Random random = new Random();
-        double resultat = random.nextInt(101);
-
-        double fallvalue = Double.parseDouble(temp3[1]);
-        //System.out.println("resultat inondation : " + resultat + " floodvalue : " + floodvalue);
-        if (resultat <= floodvalue){
-            //System.out.println("---------------terrain flooded---------------");
-            Interface.land.flooded = true;
-            Interface.land.rateOfFall = fallvalue;
-            Interface.land.duration = random.nextInt(3)+1; // durée aléatoire entre 1 et 3 tours
-        }
-    }
-
     public void cureParalysis() {
         if (currentEffect instanceof EffectParalyze) {
             currentEffect = null;

@@ -3,6 +3,7 @@ import MonstreDePoche.models.attacks.Attack;
 import MonstreDePoche.models.attacks.StruggleAttack;
 import MonstreDePoche.views.Interface;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import MonstreDePoche.models.Type;
@@ -31,6 +32,22 @@ public class WaterMonster extends Monster {
             }
         }
         return 1.0;
+    }
+
+    public void inondation(String car){
+        String[] temp = car.split("\n");
+        String[] temp2 = temp[0].split(" ");
+        String[] temp3 = temp[1].split(" ");
+        double  floodvalue = Double.parseDouble(temp2[1])*100;
+        Random random = new Random();
+        double resultat = random.nextInt(101);
+
+        double fallvalue = Double.parseDouble(temp3[1]);
+        if (resultat <= floodvalue){
+            Interface.land.flooded = true;
+            Interface.land.rateOfFall = fallvalue;
+            Interface.land.duration = random.nextInt(3)+1; // durée aléatoire entre 1 et 3 tours
+        }
     }
 
     @Override

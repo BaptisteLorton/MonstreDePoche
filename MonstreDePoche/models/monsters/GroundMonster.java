@@ -160,7 +160,7 @@ public class GroundMonster extends Monster {
             int damagePoison = this.attack /10;
             this.receiveDamage(damagePoison);
             System.out.println(this.name + " is affected by poison and loses " + damagePoison + " HP.");
-               
+            
             if (this.getHp() > 0) {
                 int nbrTourTunnel;
                 if(this.wasInTunnel==false){
