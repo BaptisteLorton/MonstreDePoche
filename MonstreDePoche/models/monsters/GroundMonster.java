@@ -3,6 +3,7 @@ import MonstreDePoche.models.attacks.Attack;
 import MonstreDePoche.views.Interface;
 import MonstreDePoche.models.attacks.StruggleAttack;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import MonstreDePoche.models.Type;
@@ -35,6 +36,19 @@ public class GroundMonster extends Monster {
             }
         }
         return 1.0;
+    }
+
+    public int goTunnel(){
+        Random rand = new Random();
+        int tirage = rand.nextInt(100);
+        if (tirage<=5){
+            System.out.println( this.name + "enter in the tunnel");
+            Random nbrTour = new Random();
+            return nbrTour.nextInt(3)+1; // Génère un nombre aléatoire entre 1 et 3
+        }
+        else{
+            return 0;
+        }
     }
 
     @Override

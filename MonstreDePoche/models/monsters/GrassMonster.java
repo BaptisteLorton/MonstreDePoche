@@ -21,6 +21,16 @@ public class GrassMonster extends NatureMonster {
         this.type = Type.GRASS;
     }
 
+    public boolean grassHeal(){
+        double valeur = ThreadLocalRandom.current().nextDouble(0.01, 0.99);
+        //si chance <= à 0.20 alors le monstre se soigne
+        if (valeur <= 0.20){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public void attack(Monster target, Attack attack) {
         if(this.currentEffect instanceof EffectBurn && Interface.land.flooded == true){

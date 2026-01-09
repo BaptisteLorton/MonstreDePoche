@@ -207,32 +207,6 @@ public class Monster {
         }
     }
 
-    public int goTunnel(){
-        Random rand = new Random();
-        int tirage = rand.nextInt(100);
-        if (tirage<=5){
-            System.out.println( this.name + "enter in the tunnel");
-            Random nbrTour = new Random();
-            return nbrTour.nextInt(3)+1; // Génère un nombre aléatoire entre 1 et 3
-        }
-        else{
-            return 0;
-        }
-    }
-
-    
-    public boolean grassHeal(){
-        double valeur = ThreadLocalRandom.current().nextDouble(0.01, 0.99);
-        //si chance <= à 0.20 alors le monstre se soigne
-        if (valeur <= 0.20){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-
-
     public void increaseHeal(int healBoost) {
         this.hp += healBoost;
         if (this.hp > this.hp_max) {
