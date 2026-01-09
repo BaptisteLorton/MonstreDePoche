@@ -92,15 +92,18 @@ public class BattleInterface {
             string += "4 - Surrender\n";
         } else if(page == 1){
             string += "Choose an attack:\n";
-            string += "1 - " + activePlayer.getActiveMonster().getAttacks()[0].getName() + "\n";
-            string += "2 - " + activePlayer.getActiveMonster().getAttacks()[1].getName() + "\n";
-            string += "3 - " + activePlayer.getActiveMonster().getAttacks()[2].getName() + "\n";
-            string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3].getName() + "\n";
+            string += "1 - " + activePlayer.getActiveMonster().getAttacks()[0].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[0].getNumberOfAttacks() + ")\n";
+            string += "2 - " + activePlayer.getActiveMonster().getAttacks()[1].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[1].getNumberOfAttacks() + ")\n";
+            string += "3 - " + activePlayer.getActiveMonster().getAttacks()[2].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[2].getNumberOfAttacks() + ")\n";
+            string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[3].getNumberOfAttacks() + ")\n";
             string += "5 - Back to main menu\n";
         } else if (page == 2){
             string += "Choose an item:\n";
             ObjectToUse[] objects = activePlayer.getObjects().toArray(new ObjectToUse[0]);
             for(int i = 0; i < objects.length; i++){
+                if (objects[i].getQuantity() <= 0) {
+                    continue;
+                }
                 string += (i + 1) + " - " + objects[i].getInformation() + "\n";
             }
             string += (objects.length + 1) + " - Back to main menu\n";
@@ -146,6 +149,11 @@ public class BattleInterface {
             switch (input) {
                 case "1":
                     clearConsole();
+                    if (!activePlayer.getActiveMonster().hasAttacksLeft()){
+                        System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+                        System.out.println(showMonsters());
+                        return new AttackAction(activePlayer, otherPlayer, "\nNo attacks left! " + activePlayer.getActiveMonster().getColor()  + activePlayer.getActiveMonster().getName() + RESET + " uses Struggle!", "0");
+                    }
                     boolean validInput = false;
                     while (!validInput) {
                         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");

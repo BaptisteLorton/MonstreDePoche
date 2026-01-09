@@ -17,10 +17,21 @@ public class UseObjectAction  extends Action {
     public void doAction(){
         showActionMessage();
         ObjectToUse object = player.getObjects().get(objectIndex);
-        if (object instanceof Potion) {
+        if (object instanceof Potion && object.getQuantity() > 0) {
             Potion potion = (Potion) object;
             potion.usePotion();
             potion.applyBonus(player.getActiveMonster());
+        } else {
+            if (object instanceof ParalyzeMedicine && object.getQuantity() > 0) {
+                ParalyzeMedicine paralyzeMedicine = (ParalyzeMedicine) object;
+                paralyzeMedicine.useParalyzeMedicine(player.getActiveMonster());
+            } else if (object instanceof BurnMedicine && object.getQuantity() > 0) {
+                BurnMedicine burnMedicine = (BurnMedicine) object;
+                burnMedicine.useBurnMedicine(player.getActiveMonster());
+            } else if (object instanceof PoisonMedicine && object.getQuantity() > 0) {
+                PoisonMedicine poisonMedicine = (PoisonMedicine) object;
+                poisonMedicine.usePoisonMedicine(player.getActiveMonster());
+            }
         }
     }
 }

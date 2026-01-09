@@ -15,6 +15,10 @@ public class AttackAction extends Action {
     @Override
     public void doAction(){
         showActionMessage();
+        if (attackChoice.equals("0")){
+            player.getActiveMonster().struggle(otherPlayer.getActiveMonster());
+            return;
+        }
         player.getActiveMonster().attack(otherPlayer.getActiveMonster(), player.getActiveMonster().getAttacks()[Integer.parseInt(attackChoice)-1]);
     }
 }

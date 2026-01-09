@@ -20,7 +20,7 @@ public class Interface {
         clearConsole();
 
         boolean running = true;
-        AudioManager.playMusic("MonstreDePoche/MonstreDePoche/resource/musique_libre_de_droit.wav");
+        AudioManager.playMusic("MonstreDePoche/resource/musique_libre_de_droit.wav");
 
         while (running) {
             System.out.println("Welcome to " + ConsoleEffects.CYAN + "PocketMonster" + ConsoleEffects.RESET + " !");
@@ -35,7 +35,7 @@ public class Interface {
             clearConsole();
             Player player2 = new Player(input);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/resource/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/resource/list_monsters.txt");
 
             ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex, RED);
             choiceInterfacePlayer1.chooseMonstersInterface();
@@ -48,7 +48,7 @@ public class Interface {
             choiceInterfacePlayer2.chooseObjectsInterface();
 
             AudioManager.stopMusic();
-            AudioManager.playMusic("MonstreDePoche/MonstreDePoche/resource/battle_music.wav");
+            AudioManager.playMusic("MonstreDePoche/resource/battle_music.wav");
 
             BattleInterface battleInterfacePlayer1 = new BattleInterface(player1, player2, RED);
             BattleInterface battleInterfacePlayer2 = new BattleInterface(player2, player1, BLUE);
@@ -69,10 +69,13 @@ public class Interface {
                 }
                 
                 if (actionPlayer1 instanceof SurrenderAction || actionPlayer2 instanceof SurrenderAction) {
-                    actionPlayer1.doAction();
-                    sleep(2000);
-                    actionPlayer2.doAction();
-                    sleep(2000);
+                    if (actionPlayer1 instanceof SurrenderAction && !(actionPlayer2 instanceof SurrenderAction)) {
+                        actionPlayer1.doAction();
+                        sleep(2000);
+                    } else if (actionPlayer2 instanceof SurrenderAction && !(actionPlayer1 instanceof SurrenderAction)){
+                        actionPlayer2.doAction();
+                        sleep(2000);
+                    }
                     running = false;
                     break;
                 }
@@ -80,7 +83,7 @@ public class Interface {
             }
             if (actionPlayer1 instanceof SurrenderAction && actionPlayer2 instanceof SurrenderAction){
                 System.out.println("\nBoth players have surrendered! It's a draw!");
-            } else if (player1.hasAvailableMonsters() || actionPlayer2 instanceof SurrenderAction) {
+            } else if (!player2.hasAvailableMonsters() || actionPlayer2 instanceof SurrenderAction) {
                 System.out.println(RED + player1.getName() + RESET + " wins the battle!");
             } else {
                 System.out.println(BLUE + player2.getName() + RESET + " wins the battle!");

@@ -6,6 +6,7 @@ public class Attack {
     public Type type;
     public int power;
     public int nbUse;
+    public int nbUseTotal;
     public float fail;
     
     public Attack(String name, Type type, int power, int nbUse, float fail) {
@@ -13,6 +14,7 @@ public class Attack {
         this.type = type;
         this.power = power;
         this.nbUse = nbUse;
+        this.nbUseTotal = nbUse;
         this.fail = fail;
     }
 
@@ -38,5 +40,19 @@ public class Attack {
 
     public void increasePower(int powerBoost) {
         this.power += powerBoost;
+    }
+
+    public String getNumberOfAttacks() {
+        return nbUse + "/" + nbUseTotal;
+    }
+
+    public void useAttack() {
+        if (nbUse > 0) {
+            nbUse--;
+        }
+    }
+
+    public int getCurrentPP() {
+        return nbUse;
     }
 }
