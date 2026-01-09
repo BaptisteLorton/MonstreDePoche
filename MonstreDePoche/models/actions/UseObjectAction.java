@@ -31,6 +31,9 @@ public class UseObjectAction  extends Action {
             } else if (object instanceof PoisonMedicine && object.getQuantity() > 0) {
                 PoisonMedicine poisonMedicine = (PoisonMedicine) object;
                 poisonMedicine.usePoisonMedicine(player.getActiveMonster());
+            } else if( object instanceof Drought && object.getQuantity() > 0) {
+                Drought drought = (Drought) object;
+                drought.useDrought();
             }
         }
     }
