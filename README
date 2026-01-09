@@ -1,0 +1,25 @@
+# POCKET MONSTER
+
+## HOW TO COMPILE 
+
+```bash
+Get-ChildItem -Recurse -Filter *.java MONSTREDEPOCHE | ForEach-Object { $_.FullName } > sources.txt
+javac -d bin (Get-Content sources.txt)
+java -cp bin MonstreDePoche.Game```
+
+## HOW TO PLAY
+
+After launching the game, the first things to do is to choose the name of the two players.
+
+Then, you can choose 3 monsters, to have an information about a monster just enter its number. To choose your final team, you just need to type the 3 monster's number separated by spaces.
+
+You can then select 5 items with the same logic than the monsters.
+
+During the battle, you just need to enter the number of the action you want to do :
+
+- Attack
+- Use an object
+- Switch monster
+- Surrender
+
+To select an attack, an object or a monster, just enter its number.
