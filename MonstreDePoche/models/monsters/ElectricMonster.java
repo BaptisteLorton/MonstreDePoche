@@ -1,5 +1,6 @@
 package MonstreDePoche.models.monsters;
 import MonstreDePoche.models.attacks.Attack;
+import MonstreDePoche.views.Interface;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,6 +20,9 @@ public class ElectricMonster extends Monster {
 
     @Override
     public void attack(Monster target, Attack attack) {
+        if(this.currentEffect instanceof EffectBurn && Interface.land.flooded == true){
+            this.currentEffect = null;
+        }
         if(this.currentEffect instanceof EffectParalyze){
             System.out.println(this.name + " is affected by paralysis.");
             EffectParalyze paralyse = (EffectParalyze) this.currentEffect;

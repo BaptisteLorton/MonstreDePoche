@@ -9,9 +9,11 @@ import MonstreDePoche.models.Type;
 import MonstreDePoche.models.Effects.Effect;
 import MonstreDePoche.models.Effects.EffectBurn;
 import MonstreDePoche.models.attacks.Attack;
+import MonstreDePoche.views.Interface;
 import MonstreDePoche.models.Effects.EffectParalyze;
 import MonstreDePoche.models.Effects.EffectPoison;
 
+import java.util.Random;
 
 
 public class Monster {
@@ -137,15 +139,33 @@ public class Monster {
         }   
     }
 
+    public void inondation(String car){
+        //System.out.println(car);
+        String[] temp = car.split("\n");
+        String[] temp2 = temp[0].split(" ");
+        String[] temp3 = temp[1].split(" ");
+        double  floodvalue = Double.parseDouble(temp2[1])*100;
+        Random random = new Random();
+        double resultat = random.nextInt(101);
+
+        double fallvalue = Double.parseDouble(temp3[1]);
+        //System.out.println("resultat inondation : " + resultat + " floodvalue : " + floodvalue);
+        if (resultat <= floodvalue){
+            //System.out.println("---------------terrain flooded---------------");
+            Interface.land.flooded = true;
+            Interface.land.rateOfFall = fallvalue;
+            Interface.land.duration = random.nextInt(3)+1; // durée aléatoire entre 1 et 3 tours
+        }
+
+    }
+
     public boolean receiveBurn(String car){
         String[] temp = car.split(" ");
-        double valeur = ThreadLocalRandom.current().nextDouble(0.10, 0.50);
-        double chance = (Double.parseDouble(temp[1])*valeur)/2; //moy entra la stat du monstre et une valeur aleatoire entre 0.10 et 0.50
 
-        double statBurn = ThreadLocalRandom.current().nextDouble(0.0, 0.70); 
+        double statBurn = ThreadLocalRandom.current().nextDouble(0.0, 0.90); 
 
         //si chance > à statBurn alors le monstre est brulé
-        if (chance > statBurn){
+        if (Double.parseDouble(temp[1]) > statBurn){
             return true;
         } else {
             return false;
@@ -174,7 +194,16 @@ public class Monster {
             return 0;
         }
     }
-        
+    
+    public boolean grassHeal(){
+        double valeur = ThreadLocalRandom.current().nextDouble(0.01, 0.99);
+        //si chance <= à 0.20 alors le monstre se soigne
+        if (valeur <= 0.20){
+            return true;
+        } else {
+            return false;
+        }
+    }
     
 
     public void increaseHeal(int healBoost) {
