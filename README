@@ -2,9 +2,11 @@
 
 ## HOW TO COMPILE 
 
+In TP repository :
+
 ```bash
-Get-ChildItem -Recurse -Filter *.java MONSTREDEPOCHE | ForEach-Object { $_.FullName } > sources.txt
-javac -d bin (Get-Content sources.txt)
+find MonstreDePoche -name "*.java" > sources.txt
+javac -d bin $(cat sources.txt)
 java -cp bin MonstreDePoche.Game```
 
 ## HOW TO PLAY
@@ -23,3 +25,10 @@ During the battle, you just need to enter the number of the action you want to d
 - Surrender
 
 To select an attack, an object or a monster, just enter its number.
+
+## WHAT HE ADDED
+
+- The first things to do is to turn on your speakers because there is music ! One when you're choosing your monsters and one for the battle.
+- Like we explained just before, you also have the possibility to choose your monsters and objects.
+- We brought details to our interface, even if it's in the console.
+- He added some objects to cover all the statistics of a monster.
