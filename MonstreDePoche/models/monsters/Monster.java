@@ -122,6 +122,14 @@ public class Monster {
         return type;
     }
 
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
     public void setAttacks(Attack[] attacks) {
         this.attacks = attacks;
     }
@@ -227,9 +235,19 @@ public class Monster {
         return false;
     }
 
-    public void struggle(Monster target) {
+    protected double getAvantage(Monster target, Attack attack){
+        return 1.0;
+    }
+
+    public int getDamage(Monster target, Attack attack){
         double coeff = ThreadLocalRandom.current().nextDouble(0.85, 1.0);
-        double damage = 20 * (double)this.attack / (double)target.defense * coeff;
-        target.receiveDamage((int)damage);
+        double damage = ((11 * target.getAttack() * attack.getPower()) / (25 * target.getDefense()) + 2) * getAvantage(target, attack) * coeff;
+        return (int) damage;
+    }
+
+    public int getDamageStruggle(Monster target, Attack attack){
+        double coeff = ThreadLocalRandom.current().nextDouble(0.85, 1.0);
+        double damage = 20 * (double)this.getAttack() / (double)target.getDefense() * coeff * getAvantage(target, attack);
+        return (int)damage;
     }
 }

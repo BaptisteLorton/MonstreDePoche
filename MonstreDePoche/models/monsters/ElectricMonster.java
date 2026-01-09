@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import MonstreDePoche.models.Type;
 import MonstreDePoche.models.Effects.*;
+import MonstreDePoche.models.attacks.StruggleAttack;
 
 public class ElectricMonster extends Monster {
     public ElectricMonster(String name, int hp, int attack, int defense, int speed, Attack[] attacks) {
@@ -15,6 +16,18 @@ public class ElectricMonster extends Monster {
     public ElectricMonster(MonsterChoice choice) {
         super(choice);
         this.type = Type.ELECTRIC;
+    }
+
+    @Override
+    protected double getAvantage(Monster target, Attack attack){
+        if (attack.getType() == Type.ELECTRIC || attack instanceof StruggleAttack){
+            if (target instanceof WaterMonster){
+                return 2.0;
+            } else if (target instanceof GroundMonster){
+                return 0.5;
+            }
+        }
+        return 1.0;
     }
 
     @Override
@@ -48,17 +61,16 @@ public class ElectricMonster extends Monster {
                         }
                     }
                     if (this.getHp() > 0) {
-                        int damage = attack.getPower();
-                        if (target instanceof WaterMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GroundMonster){
-                            damage = attack.getPower()/2;
+                        int damage;
+                        if (attack instanceof StruggleAttack){
+                            damage = getDamageStruggle(target, attack);
+                        } else {
+                            damage = getDamage(target, attack);
                         }
                         attack.useAttack();
                         target.receiveDamage(damage);
                     }
-                    }
-
+                }
                 return;
             }
         }
@@ -68,11 +80,11 @@ public class ElectricMonster extends Monster {
             System.out.println(this.name + " is affected by burn and loses " + damageBurn + " HP.");
 
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof WaterMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof GroundMonster){
-                    damage = attack.getPower()/2;
+                int damage;
+                if (attack instanceof StruggleAttack){
+                    damage = getDamageStruggle(target, attack);
+                } else {
+                    damage = getDamage(target, attack);
                 }
                 attack.useAttack();
                 target.receiveDamage(damage);
@@ -82,43 +94,33 @@ public class ElectricMonster extends Monster {
             int damagePoison = this.attack /10;
             this.receiveDamage(damagePoison);
             System.out.println(this.name + " is affected by poison and loses " + damagePoison + " HP.");
-               
             if (this.getHp() > 0) {
-                    int damage = attack.getPower();
-                    if (target instanceof WaterMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof GroundMonster){
-                        damage = attack.getPower()/2;
-                    }
-                    attack.useAttack();
-                    target.receiveDamage(damage);
-                }
-
+                int damage = getDamage(target, attack);
+                attack.useAttack();
+                target.receiveDamage(damage);
+            }
         }
         else{
             
             if(attack.getType() == Type.ELECTRIC){
                 boolean valid = this.receiveParalysis(this.caracteristicSpecial);
                 if(valid == true){
-                        System.out.println(" paralysis succeded");
-                        target.currentEffect = new EffectParalyze();
-                    }
-                    else{
-                        System.out.println(" paralysis failed");
-                        }
+                    System.out.println(" paralysis succeded");
+                    target.currentEffect = new EffectParalyze();
+                } else {
+                    System.out.println(" paralysis failed");
+                }
             }
-
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof WaterMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof GroundMonster){
-                    damage = attack.getPower()/2;
+                int damage;
+                if (attack instanceof StruggleAttack){
+                    damage = getDamageStruggle(target, attack);
+                } else {
+                    damage = getDamage(target, attack);
                 }
                 attack.useAttack();
                 target.receiveDamage(damage);
-            }
-                    
+            }       
         }
     }
 }

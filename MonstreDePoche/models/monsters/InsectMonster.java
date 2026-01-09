@@ -1,5 +1,6 @@
 package MonstreDePoche.models.monsters;
 import MonstreDePoche.models.attacks.Attack;
+import MonstreDePoche.models.attacks.StruggleAttack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -50,11 +51,11 @@ public class InsectMonster extends NatureMonster {
                         }
                     }
                     if (this.getHp() > 0) {
-                        int damage = attack.getPower();
-                        if (target instanceof GroundMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof FireMonster){
-                            damage = attack.getPower()/2;
+                        int damage;
+                        if (attack instanceof StruggleAttack){
+                            damage = getDamageStruggle(target, attack);
+                        } else {
+                            damage = getDamage(target, attack);
                         }
                         attack.useAttack();
                         target.receiveDamage(damage);
@@ -68,11 +69,11 @@ public class InsectMonster extends NatureMonster {
             System.out.println(this.name + " is affected by burn and loses " + damageBurn + " HP.");
 
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof GroundMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof FireMonster){
-                    damage = attack.getPower()/2;
+                int damage;
+                if (attack instanceof StruggleAttack){
+                    damage = getDamageStruggle(target, attack);
+                } else {
+                    damage = getDamage(target, attack);
                 }
                 attack.useAttack();
                 target.receiveDamage(damage);
@@ -94,11 +95,11 @@ public class InsectMonster extends NatureMonster {
                     }
                 }
                 if (this.getHp() > 0) {
-                    int damage = attack.getPower();
-                    if (target instanceof GroundMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof FireMonster){
-                        damage = attack.getPower()/2;
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
                     }
                     attack.useAttack();
                     target.receiveDamage(damage);
@@ -117,11 +118,11 @@ public class InsectMonster extends NatureMonster {
                     }
                 }
                 if (this.getHp() > 0) {
-                    int damage = attack.getPower();
-                    if (target instanceof GroundMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof FireMonster){
-                        damage = attack.getPower()/2;
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
                     }
                     attack.useAttack();
                     target.receiveDamage(damage);

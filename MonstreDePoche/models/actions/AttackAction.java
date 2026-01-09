@@ -1,6 +1,7 @@
 package MonstreDePoche.models.actions;
 
 import MonstreDePoche.models.Player;
+import MonstreDePoche.models.attacks.StruggleAttack;
 
 public class AttackAction extends Action {
     String attackChoice;
@@ -16,7 +17,7 @@ public class AttackAction extends Action {
     public void doAction(){
         showActionMessage();
         if (attackChoice.equals("0")){
-            player.getActiveMonster().struggle(otherPlayer.getActiveMonster());
+            player.getActiveMonster().attack(otherPlayer.getActiveMonster(), new StruggleAttack());
             return;
         }
         player.getActiveMonster().attack(otherPlayer.getActiveMonster(), player.getActiveMonster().getAttacks()[Integer.parseInt(attackChoice)-1]);

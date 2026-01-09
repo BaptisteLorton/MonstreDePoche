@@ -1,5 +1,6 @@
 package MonstreDePoche.models.monsters;
 import MonstreDePoche.models.attacks.Attack;
+import MonstreDePoche.models.attacks.StruggleAttack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -24,6 +25,18 @@ public class GroundMonster extends Monster {
     }
 
     @Override
+    protected double getAvantage(Monster target, Attack attack){
+        if (attack.getType() == Type.GROUND || attack instanceof StruggleAttack){
+            if (target instanceof ElectricMonster){
+                return 2.0;
+            } else if (target instanceof NatureMonster){
+                return 0.5;
+            }
+        }
+        return 1.0;
+    }
+
+    @Override
     public void attack(Monster target, Attack attack) {
 
         if(this.currentEffect instanceof EffectParalyze){
@@ -44,45 +57,42 @@ public class GroundMonster extends Monster {
                 else{
                     System.out.println(this.name + " Succed attack!");
                     if (this.getHp() > 0) {
-                    int nbrTourTunnel;
-                    if(this.wasInTunnel==false){
-                        nbrTourTunnel = goTunnel();
-                        if(nbrTourTunnel !=0){
-                            this.nbrTunnel=nbrTourTunnel;
-                            this.wasInTunnel=true;
-                            this.defense +=20;
-                        }
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
-                    }else{
+                        int nbrTourTunnel;
+                        if(this.wasInTunnel==false){
+                            nbrTourTunnel = goTunnel();
+                            if(nbrTourTunnel !=0){
+                                this.nbrTunnel=nbrTourTunnel;
+                                this.wasInTunnel=true;
+                                this.defense +=20;
+                            }
+                            int damage;
+                            if (attack instanceof StruggleAttack){
+                                damage = getDamageStruggle(target, attack);
+                            } else {
+                                damage = getDamage(target, attack);
+                            }
+                            attack.useAttack();
+                            target.receiveDamage(damage);
+                        }else{
+                            int damage;
+                            if (attack instanceof StruggleAttack){
+                                damage = getDamageStruggle(target, attack);
+                            } else {
+                                damage = getDamage(target, attack);
+                            }
+                            attack.useAttack();
+                            target.receiveDamage(damage);
 
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
-
-                        if(this.nbrTunnel!=0){
-                            this.nbrTunnel-=1;
-                        }
-                        else{
-                            this.wasInTunnel=false;
-                            this.defense -=20;
-                        }
-                        
-                    } 
-                }
+                            if(this.nbrTunnel!=0){
+                                this.nbrTunnel-=1;
+                            }
+                            else{
+                                this.wasInTunnel=false;
+                                this.defense -=20;
+                            }
+                        } 
                     }
-
+                }
             }
         }
         else if(this.currentEffect instanceof EffectBurn){
@@ -91,43 +101,42 @@ public class GroundMonster extends Monster {
             System.out.println(this.name + " is affected by burn and loses " + damageBurn + " HP.");
 
             if (this.getHp() > 0) {
-                    int nbrTourTunnel;
-                    if(this.wasInTunnel==false){
-                        nbrTourTunnel = goTunnel();
-                        if(nbrTourTunnel !=0){
-                            this.nbrTunnel=nbrTourTunnel;
-                            this.wasInTunnel=true;
-                            this.defense +=20;
-                        }
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
-                    }else{
+                int nbrTourTunnel;
+                if(this.wasInTunnel==false){
+                    nbrTourTunnel = goTunnel();
+                    if(nbrTourTunnel !=0){
+                        this.nbrTunnel=nbrTourTunnel;
+                        this.wasInTunnel=true;
+                        this.defense +=20;
+                    }
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
+                    }
+                    attack.useAttack();
+                    target.receiveDamage(damage);
+                }else{
 
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
+                    }
+                    attack.useAttack();
+                    target.receiveDamage(damage);
 
-                        if(this.nbrTunnel!=0){
-                            this.nbrTunnel-=1;
-                        }
-                        else{
-                            this.wasInTunnel=false;
-                            this.defense -=20;
-                        }
-                        
-                    }        
-                }
+                    if(this.nbrTunnel!=0){
+                        this.nbrTunnel-=1;
+                    }
+                    else{
+                        this.wasInTunnel=false;
+                        this.defense -=20;
+                    }
+                }        
+            }
         }
         else if(this.currentEffect instanceof EffectPoison){
             int damagePoison = this.attack /10;
@@ -135,88 +144,82 @@ public class GroundMonster extends Monster {
             System.out.println(this.name + " is affected by poison and loses " + damagePoison + " HP.");
                
             if (this.getHp() > 0) {
-                    int nbrTourTunnel;
-                    if(this.wasInTunnel==false){
-                        nbrTourTunnel = goTunnel();
-                        if(nbrTourTunnel !=0){
-                            this.nbrTunnel=nbrTourTunnel;
-                            this.wasInTunnel=true;
-                            this.defense +=20;
-                        }
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
-                    }else{
+                int nbrTourTunnel;
+                if(this.wasInTunnel==false){
+                    nbrTourTunnel = goTunnel();
+                    if(nbrTourTunnel !=0){
+                        this.nbrTunnel=nbrTourTunnel;
+                        this.wasInTunnel=true;
+                        this.defense +=20;
+                    }
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
+                    }
+                    attack.useAttack();
+                    target.receiveDamage(damage);
+                }else{
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
+                    }
+                    attack.useAttack();
+                    target.receiveDamage(damage);
 
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
-
-                        if(this.nbrTunnel!=0){
-                            this.nbrTunnel-=1;
-                        }
-                        else{
-                            this.wasInTunnel=false;
-                            this.defense -=20;
-                        }
-                        
-                    }  
-                }
+                    if(this.nbrTunnel!=0){
+                        this.nbrTunnel-=1;
+                    }
+                    else{
+                        this.wasInTunnel=false;
+                        this.defense -=20;
+                    }
+                }  
+            }
         }
         else{
-                if (this.getHp() > 0) {
-                    int nbrTourTunnel;
-                    if(this.wasInTunnel==false){
-                        nbrTourTunnel = goTunnel();
-                        if(nbrTourTunnel !=0){
-                            this.nbrTunnel=nbrTourTunnel;
-                            this.wasInTunnel=true;
-                            this.defense +=20;
-                        }
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
-                    }else{
-
-                        int damage = attack.getPower();
-                        if (target instanceof ElectricMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof GrassMonster){
-                            damage = attack.getPower()/2;
-                        }
-                        attack.useAttack();
-                        target.receiveDamage(damage);
-
-                        if(this.nbrTunnel!=0){
-                            this.nbrTunnel-=1;
-                            System.out.println("nbrTourTunnel after decrease :"+this.nbrTunnel +1);
-                        }
-                        else{
-                            System.out.println( this.name + "leave the tunnel");
-                            this.wasInTunnel=false;
-                            this.defense -=20;
-                        }
-                        
+            if (this.getHp() > 0) {
+                int nbrTourTunnel;
+                if(this.wasInTunnel==false){
+                    nbrTourTunnel = goTunnel();
+                    if(nbrTourTunnel !=0){
+                        this.nbrTunnel=nbrTourTunnel;
+                        this.wasInTunnel=true;
+                        this.defense +=20;
                     }
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
+                    }
+                    attack.useAttack();
+                    target.receiveDamage(damage);
+                }else{
 
-                    
-                    
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
+                    }
+                    attack.useAttack();
+                    target.receiveDamage(damage);
+
+                    if(this.nbrTunnel!=0){
+                        this.nbrTunnel-=1;
+                        System.out.println("nbrTourTunnel after decrease :"+this.nbrTunnel +1);
+                    }
+                    else{
+                        System.out.println( this.name + "leave the tunnel");
+                        this.wasInTunnel=false;
+                        this.defense -=20;
+                    }
                 }
-                }        
+            }
+        }        
     }
 }

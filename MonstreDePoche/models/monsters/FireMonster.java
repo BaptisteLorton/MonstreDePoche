@@ -1,5 +1,6 @@
 package MonstreDePoche.models.monsters;
 import MonstreDePoche.models.attacks.Attack;
+import MonstreDePoche.models.attacks.StruggleAttack;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -17,6 +18,18 @@ public class FireMonster extends Monster {
     public FireMonster(MonsterChoice choice) {
         super(choice);
         this.type = Type.FIRE;
+    }
+
+    @Override
+    protected double getAvantage(Monster target, Attack attack){
+        if (attack.getType() == Type.FIRE || attack instanceof StruggleAttack){
+            if (target instanceof GrassMonster){
+                return 2.0;
+            } else if (target instanceof WaterMonster){
+                return 0.5;
+            }
+        }
+        return 1.0;
     }
 
     @Override
@@ -50,11 +63,11 @@ public class FireMonster extends Monster {
                         }
                     }
                     if (this.getHp() > 0) {
-                        int damage = attack.getPower();
-                        if (target instanceof GrassMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof WaterMonster){
-                            damage = attack.getPower()/2;
+                        int damage;
+                        if (attack instanceof StruggleAttack){
+                            damage = getDamageStruggle(target, attack);
+                        } else {
+                            damage = getDamage(target, attack);
                         }
                         attack.useAttack();
                         target.receiveDamage(damage);
@@ -71,11 +84,11 @@ public class FireMonster extends Monster {
 
 
             if (this.getHp() > 0) {
-                int damage = attack.getPower();
-                if (target instanceof GrassMonster){
-                    damage = attack.getPower()*2;
-                } else if (target instanceof WaterMonster){
-                    damage = attack.getPower()/2;
+                int damage;
+                if (attack instanceof StruggleAttack){
+                    damage = getDamageStruggle(target, attack);
+                } else {
+                    damage = getDamage(target, attack);
                 }
                 attack.useAttack();
                 target.receiveDamage(damage);
@@ -87,11 +100,11 @@ public class FireMonster extends Monster {
             System.out.println(this.name + " is affected by poison and loses " + damagePoison + " HP.");
                
             if (this.getHp() > 0) {
-                    int damage = attack.getPower();
-                    if (target instanceof GrassMonster){
-                        damage = attack.getPower()*2;
-                    } else if (target instanceof WaterMonster){
-                        damage = attack.getPower()/2;
+                    int damage;
+                    if (attack instanceof StruggleAttack){
+                        damage = getDamageStruggle(target, attack);
+                    } else {
+                        damage = getDamage(target, attack);
                     }
                     attack.useAttack();
                     target.receiveDamage(damage);
@@ -110,11 +123,11 @@ public class FireMonster extends Monster {
                         }
                     }
                     if (this.getHp() > 0) {
-                        int damage = attack.getPower();
-                        if (target instanceof GrassMonster){
-                            damage = attack.getPower()*2;
-                        } else if (target instanceof WaterMonster){
-                            damage = attack.getPower()/2;
+                        int damage;
+                        if (attack instanceof StruggleAttack){
+                            damage = getDamageStruggle(target, attack);
+                        } else {
+                            damage = getDamage(target, attack);
                         }
                         attack.useAttack();
                         target.receiveDamage(damage);
