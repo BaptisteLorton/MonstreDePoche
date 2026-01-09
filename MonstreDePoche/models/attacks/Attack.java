@@ -51,4 +51,8 @@ public class Attack {
             nbUse--;
         }
     }
+
+    public int getCurrentPP() {
+        return nbUse;
+    }
 }

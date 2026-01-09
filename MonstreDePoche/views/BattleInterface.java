@@ -145,6 +145,11 @@ public class BattleInterface {
             switch (input) {
                 case "1":
                     clearConsole();
+                    if (!activePlayer.getActiveMonster().hasAttacksLeft()){
+                        System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");
+                        System.out.println(showMonsters());
+                        return new AttackAction(activePlayer, otherPlayer, "\nNo attacks left! " + activePlayer.getActiveMonster().getColor()  + activePlayer.getActiveMonster().getName() + RESET + " uses Struggle!", "0");
+                    }
                     boolean validInput = false;
                     while (!validInput) {
                         System.out.println(color + activePlayer.getName() + RESET + ", it's your turn to play!");

@@ -217,4 +217,19 @@ public class Monster {
     public void increaseSpeed(int speedBoost) {
         this.speed += speedBoost;
     }
+
+    public boolean hasAttacksLeft() {
+        for (Attack atk : this.attacks) {
+            if (atk.getCurrentPP() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void struggle(Monster target) {
+        double coeff = ThreadLocalRandom.current().nextDouble(0.85, 1.0);
+        double damage = 20 * (double)this.attack / (double)target.defense * coeff;
+        target.receiveDamage((int)damage);
+    }
 }
