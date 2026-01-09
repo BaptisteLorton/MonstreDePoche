@@ -57,11 +57,11 @@ public class ElectricMonster extends Monster {
                     if(attack.getType() == Type.ELECTRIC){
                         boolean valid = this.receiveParalysis(this.caracteristicSpecial);
                         if(valid == true){
-                            System.out.println(" paralysis ok");
+                            System.out.println("Paralysis ok");
                             target.currentEffect = new EffectParalyze();
                         }
                         else{
-                            System.out.println(" paralysis failed");
+                            System.out.println("Paralysis failed");
                         }
                     }
                     if (this.getHp() > 0) {

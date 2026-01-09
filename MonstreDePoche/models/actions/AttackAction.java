@@ -1,5 +1,7 @@
 package MonstreDePoche.models.actions;
 
+import static MonstreDePoche.controllers.GameActions.sleep;
+
 import MonstreDePoche.models.Player;
 import MonstreDePoche.models.attacks.StruggleAttack;
 
@@ -16,6 +18,7 @@ public class AttackAction extends Action {
     @Override
     public void doAction(){
         showActionMessage();
+        sleep(2000);
         if (attackChoice.equals("0")){
             player.getActiveMonster().attack(otherPlayer.getActiveMonster(), new StruggleAttack());
             return;

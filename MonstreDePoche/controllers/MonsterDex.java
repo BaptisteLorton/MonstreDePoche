@@ -11,10 +11,8 @@ import MonstreDePoche.models.Type;
 public class MonsterDex {
     
     // Note : Vérifiez bien votre chemin d'accès selon la structure de votre projet.
-    //private MonsterChoice[] monsterDex = createMonsterDex("MonstreDePoche/MonstreDePoche/list_monsters/list_monsters.txt");
 
     public static MonsterChoice[] createMonsterDex(String file) {
-        //List<MonsterChoice> tempDexList = new ArrayList<>();
         List<MonsterChoice> tempDexList = new ArrayList<>();
 
         try {

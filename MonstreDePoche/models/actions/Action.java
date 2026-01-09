@@ -1,6 +1,7 @@
 package MonstreDePoche.models.actions;
 
 import MonstreDePoche.models.Player;
+import MonstreDePoche.models.actions.Action;
 
 public class Action {
     Player player;

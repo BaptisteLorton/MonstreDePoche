@@ -20,7 +20,7 @@ public class Interface {
         clearConsole();
 
         boolean running = true;
-        AudioManager.playMusic("MonstreDePoche/MonstreDePoche/resource/musique_libre_de_droit.wav");
+        AudioManager.playMusic("MonstreDePoche/resource/musique_libre_de_droit.wav");
 
         while (running) {
             System.out.println("Welcome to " + ConsoleEffects.CYAN + "PocketMonster" + ConsoleEffects.RESET + " !");
@@ -28,14 +28,14 @@ public class Interface {
             System.out.print("\n>");
             String input = scanner.nextLine();
             clearConsole();
-            Player player1 = new Player(input);
+            Player player1 = new Player(input, RED);
             System.out.println("Please enter the name of the second player: ");
             System.out.print("\n>");
             input = scanner.nextLine();
             clearConsole();
-            Player player2 = new Player(input);
+            Player player2 = new Player(input, BLUE);
 
-            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/MonstreDePoche/resource/list_monsters.txt");
+            MonsterChoice[] monsterDex = MonsterDex.createMonsterDex("MonstreDePoche/resource/list_monsters.txt");
 
             ChoiceInterface choiceInterfacePlayer1 = new ChoiceInterface(player1, monsterDex, RED);
             choiceInterfacePlayer1.chooseMonstersInterface();
@@ -48,7 +48,7 @@ public class Interface {
             choiceInterfacePlayer2.chooseObjectsInterface();
 
             AudioManager.stopMusic();
-            AudioManager.playMusic("MonstreDePoche/MonstreDePoche/resource/battle_music.wav");
+            AudioManager.playMusic("MonstreDePoche/resource/battle_music.wav");
 
             BattleInterface battleInterfacePlayer1 = new BattleInterface(player1, player2, RED);
             BattleInterface battleInterfacePlayer2 = new BattleInterface(player2, player1, BLUE);

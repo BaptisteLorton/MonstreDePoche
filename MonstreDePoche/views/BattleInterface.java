@@ -8,7 +8,6 @@ import MonstreDePoche.models.actions.*;
 import MonstreDePoche.models.monsters.Monster;
 import static MonstreDePoche.controllers.GameActions.*;
 import MonstreDePoche.models.objects.ObjectToUse;
-import MonstreDePoche.models.Land;
 
 public class BattleInterface {
     private String color;
@@ -20,6 +19,53 @@ public class BattleInterface {
         this.activePlayer = activePlayer;
         this.otherPlayer = otherPlayer;
         this.color = color;
+    }
+    
+    private String showMenu(int page){
+        String string = "\nWhat do you want to do?\n";
+        if(page == 0){
+            string += "1 - Attack\n";
+            string += "2 - Use Item\n";
+            string += "3 - Switch Monster\n";
+            string += "4 - Surrender\n";
+        } else if(page == 1){
+            string += "Choose an attack:\n";
+            string += "1 - " + activePlayer.getActiveMonster().getAttacks()[0].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[0].getNumberOfAttacks() + ")\n";
+            string += "2 - " + activePlayer.getActiveMonster().getAttacks()[1].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[1].getNumberOfAttacks() + ")\n";
+            string += "3 - " + activePlayer.getActiveMonster().getAttacks()[2].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[2].getNumberOfAttacks() + ")\n";
+            string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[3].getNumberOfAttacks() + ")\n";
+            string += "5 - Back to main menu\n";
+        } else if (page == 2){
+            string += "Choose an item:\n";
+            ObjectToUse[] objects = activePlayer.getObjects().toArray(new ObjectToUse[0]);
+            for(int i = 0; i < objects.length; i++){
+                if (objects[i].getQuantity() <= 0) {
+                    continue;
+                }
+                string += (i + 1) + " - " + objects[i].getInformation() + "\n";
+            }
+            string += (objects.length + 1) + " - Back to main menu\n";
+        } else if(page == 3){
+            string += "Choose a monster to switch to:\n";
+            Monster[] monsters = getAvailableMonsters(activePlayer);
+            for(int i = 0; i < monsters.length; i++){
+                if (monsters[i] == activePlayer.getActiveMonster()) {
+                    continue;
+                } else {
+                    if (monsters[i].getHp() <= 0) {
+                        string += (i + 1) + " - " + GRAY + monsters[i].getName() + RESET + " (" + monsters[i].getHp() + "/" + monsters[i].getHpMax() + " HP)\n";
+                    } else {
+                        string += (i + 1) + " - " + monsters[i].getColor() + monsters[i].getName() + RESET + " (" + monsters[i].getHp() + "/" + monsters[i].getHpMax() + " HP)\n";
+                    }
+                }
+            }
+            if (otherPlayer.getActiveMonster().getHp() <= 0) {
+                string += "3 - Keep current monster";
+            } else if (activePlayer.getActiveMonster().getHp() > 0) {
+                string += "3 - Back to main menu\n";
+            }
+        }
+        return string;
     }
 
     private String showHp(Monster monster) {
@@ -80,53 +126,6 @@ public class BattleInterface {
 
            """;
         string += "                     " + activeInfo + "\n";
-        return string;
-    }
-    
-    private String showMenu(int page){
-        String string = "\nWhat do you want to do?\n";
-        if(page == 0){
-            string += "1 - Attack\n";
-            string += "2 - Use Item\n";
-            string += "3 - Switch Monster\n";
-            string += "4 - Surrender\n";
-        } else if(page == 1){
-            string += "Choose an attack:\n";
-            string += "1 - " + activePlayer.getActiveMonster().getAttacks()[0].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[0].getNumberOfAttacks() + ")\n";
-            string += "2 - " + activePlayer.getActiveMonster().getAttacks()[1].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[1].getNumberOfAttacks() + ")\n";
-            string += "3 - " + activePlayer.getActiveMonster().getAttacks()[2].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[2].getNumberOfAttacks() + ")\n";
-            string += "4 - " + activePlayer.getActiveMonster().getAttacks()[3].getName() + " (" + activePlayer.getActiveMonster().getAttacks()[3].getNumberOfAttacks() + ")\n";
-            string += "5 - Back to main menu\n";
-        } else if (page == 2){
-            string += "Choose an item:\n";
-            ObjectToUse[] objects = activePlayer.getObjects().toArray(new ObjectToUse[0]);
-            for(int i = 0; i < objects.length; i++){
-                if (objects[i].getQuantity() <= 0) {
-                    continue;
-                }
-                string += (i + 1) + " - " + objects[i].getInformation() + "\n";
-            }
-            string += (objects.length + 1) + " - Back to main menu\n";
-        } else if(page == 3){
-            string += "Choose a monster to switch to:\n";
-            Monster[] monsters = getAvailableMonsters(activePlayer);
-            for(int i = 0; i < monsters.length; i++){
-                if (monsters[i] == activePlayer.getActiveMonster()) {
-                    continue;
-                } else {
-                    if (monsters[i].getHp() <= 0) {
-                        string += (i + 1) + " - " + GRAY + monsters[i].getName() + RESET + " (" + monsters[i].getHp() + "/" + monsters[i].getHpMax() + " HP)\n";
-                    } else {
-                        string += (i + 1) + " - " + monsters[i].getColor() + monsters[i].getName() + RESET + " (" + monsters[i].getHp() + "/" + monsters[i].getHpMax() + " HP)\n";
-                    }
-                }
-            }
-            if (otherPlayer.getActiveMonster().getHp() <= 0) {
-                string += "3 - Keep current monster";
-            } else if (activePlayer.getActiveMonster().getHp() > 0) {
-                string += "3 - Back to main menu\n";
-            }
-        }
         return string;
     }
 
@@ -210,7 +209,7 @@ public class BattleInterface {
                     clearConsole();
                     if (activePlayer.getActiveMonster().getHp() <= 0) {
                         System.out.println("Your active monster has fainted! You must switch to another monster.\n");
-                    } else {
+                    } else if (otherPlayer.getActiveMonster().getHp() <= 0) {
                         System.out.println("The opponent's active monster has fainted! You have the opportunity to switch to another monster.\n");
                     }
                     String check = "start";

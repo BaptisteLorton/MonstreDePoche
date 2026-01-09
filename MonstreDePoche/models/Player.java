@@ -10,9 +10,11 @@ public class Player {
     private Monster activeMonster;
     private Monster[] monsters = new Monster[3];
     private ArrayList<ObjectToUse> objects = new ArrayList<>();
+    private String color;
 
-    public Player(String name) {
+    public Player(String name, String color) {
         this.name = name;
+        this.color = color;
     }
 
     public String getName() {
@@ -42,6 +44,10 @@ public class Player {
 
     public ArrayList<ObjectToUse> getObjects() {
         return objects;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public boolean canPlay() {
